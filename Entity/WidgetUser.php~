@@ -1,0 +1,105 @@
+<?php
+
+/**
+ * This file is part of the pdAdmin pdWidget package.
+ *
+ * @package     pdWidget
+ *
+ * @author      Ramazan APAYDIN <iletisim@ramazanapaydin.com>
+ * @copyright   Copyright (c) 2018 Ramazan APAYDIN
+ * @license     LICENSE
+ *
+ * @link        https://github.com/rmznpydn/pd-widget
+ */
+
+namespace Pd\WidgetBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="widget_user")
+ */
+class WidgetUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $config;
+
+    /**
+     * @ORM\OneToOne(targetEntity="UserInterface")
+     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", unique=true)
+     */
+    private $owner;
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set activeWidgets.
+     *
+     * @param array $activeWidgets
+     *
+     * @return WidgetUser
+     */
+    public function setActiveWidgets($activeWidgets)
+    {
+        $this->activeWidgets = $activeWidgets;
+
+        return $this;
+    }
+
+    /**
+     * Get activeWidgets.
+     *
+     * @return array
+     */
+    public function getActiveWidgets()
+    {
+        return $this->activeWidgets;
+    }
+
+    public function addWidgetConfig(string $widgetId)
+    {
+
+    }
+
+    /**
+     * Set owner.
+     *
+     * @param UserInterface|null $owner
+     *
+     * @return WidgetUser
+     */
+    public function setOwner(UserInterface $owner = null)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner.
+     *
+     * @return UserInterface|null
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+}

@@ -1,0 +1,27 @@
+services:
+    _defaults:
+        public: false
+
+    # Render Service
+    pd_widget.render:
+        class: Pd\WidgetBundle\Render\TwigRender
+        arguments:
+            $engine: '@twig'
+            $baseTemplate: ''
+
+    # Builder Service
+    pd_widget.builder:
+        class: Pd\WidgetBundle\Widget\WidgetBuilder
+        arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
+
+    # Widget Service
+    pd_widget.core:
+        public: true
+        class: Pd\WidgetBundle\Widget\Widget
+        arguments: ['@security.authorization_checker', '@event_dispatcher']
+
+    # Twig Extension
+    pd_widget.twig_extension:
+        class: Pd\WidgetBundle\Widget\WidgetExtension
+        arguments: ['@pd_widget.render', '@pd_widget.builder', '@pd_widget.core']
+        tags: ['twig.extension']
