@@ -22,6 +22,6 @@ services:
 
     # Twig Extension
     pd_widget.twig_extension:
-        class: Pd\WidgetBundle\Widget\WidgetExtension
+        class: Pd\WidgetBundle\Twig\WidgetExtension
         arguments: ['@pd_widget.render', '@pd_widget.builder', '@pd_widget.core']
         tags: ['twig.extension']

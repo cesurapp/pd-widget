@@ -12,10 +12,12 @@
  * @link        https://github.com/rmznpydn/pd-widget
  */
 
-namespace Pd\WidgetBundle\Widget;
+namespace Pd\WidgetBundle\Twig;
 
 use Pd\WidgetBundle\Builder\ItemInterface;
 use Pd\WidgetBundle\Render\RenderInterface;
+use Pd\WidgetBundle\Widget\WidgetBuilderInterface;
+use Pd\WidgetBundle\Widget\WidgetInterface;
 
 /**
  * Widget Twig Extension.
