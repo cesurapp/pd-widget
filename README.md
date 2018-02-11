@@ -34,6 +34,16 @@ return [
 ];
 ```
 
+Add Widget Routing:
+
+```yaml
+#config/routes.yaml
+
+# Widget Routing
+widget:
+    resource: "@PdWidgetBundle/Resources/config/routing.yml"
+```
+
 Edit Doctrine Settings (`config/packages/doctrine.yaml`):
 
 ```yaml
