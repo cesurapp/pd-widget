@@ -1,6 +1,11 @@
 # pdWidget Bundle
 Flexible widget system for Symfony 4+. 
 
+[![Latest Stable Version](https://poser.pugx.org/rmznpydn/pd-widget/v/stable)](https://packagist.org/packages/rmznpydn/pd-widget)
+[![Total Downloads](https://poser.pugx.org/rmznpydn/pd-widget/downloads)](https://packagist.org/packages/rmznpydn/pd-widget)
+[![Latest Unstable Version](https://poser.pugx.org/rmznpydn/pd-widget/v/unstable)](https://packagist.org/packages/rmznpydn/pd-widget)
+[![License](https://poser.pugx.org/rmznpydn/pd-widget/license)](https://packagist.org/packages/rmznpydn/pd-widget)
+
 Installation
 ---
 
