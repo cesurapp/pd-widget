@@ -29,7 +29,7 @@ class WidgetController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function statusAction(Request $request, string $widgetId, bool $status = true)
+    public function status(Request $request, string $widgetId, bool $status = true)
     {
         // Build Widget
         $widgets = $this->get('pd_widget.core')->getWidgets();
@@ -51,7 +51,7 @@ class WidgetController extends Controller
         }
 
         // Response
-        $redirect = $request->headers->get('referer') ?? $this->generateUrl('admin_dashboard');
+        $redirect = $request->headers->get('referer') ?? $this->generateUrl($this->getParameter('pd_widget.return_route'));
 
         return $this->redirect($redirect);
     }

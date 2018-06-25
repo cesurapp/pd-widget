@@ -36,6 +36,9 @@ class PdWidgetExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        // Set Parameter
+        $container->setParameter('pd_widget.return_route', $config['return_route']);
+
         // Set Configuration
         $container
             ->getDefinition('pd_widget.render')

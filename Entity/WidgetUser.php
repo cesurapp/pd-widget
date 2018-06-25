@@ -17,8 +17,9 @@ namespace Pd\WidgetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Pd\WidgetBundle\Repository\WidgetUserRepository")
  * @ORM\Table(name="widget_user")
+ *
  */
 class WidgetUser
 {

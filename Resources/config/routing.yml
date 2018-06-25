@@ -1,5 +1,5 @@
 widget_status:
     path: /widget/{widgetId}/{status}
-    controller: PdWidgetBundle:Widget:status
+    controller: Pd\WidgetBundle\Controller\WidgetController::status
     defaults:
         status: true

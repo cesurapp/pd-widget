@@ -27,6 +27,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('base_template')->defaultValue('@PdWidget/widgetBase.html.twig')->end()
+                ->scalarNode('return_route')->defaultValue('admin_dashboard')->end()
             ->end()
         ;
 

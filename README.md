@@ -67,6 +67,7 @@ You can specify the template for the widget container.
 
 pd_widget:
     base_template: '@PdWidget/widgetBase.html.twig'
+    return_route: 'admin_dashboard'
 ```
 
 Create Your First Widget
