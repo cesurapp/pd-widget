@@ -14,6 +14,8 @@
 
 namespace Pd\WidgetBundle\Builder;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Item Builder.
  *
@@ -50,6 +52,16 @@ class Item implements ItemInterface
      * @var callable
      */
     private $data = null;
+
+    /**
+     * @var array
+     */
+    private $config = null;
+
+    /**
+     * @var callable
+     */
+    private $configProcess = null;
 
     /**
      * @var int
@@ -137,7 +149,7 @@ class Item implements ItemInterface
         if (null !== $this->data) {
             $data = $this->data;
 
-            return $data();
+            return $data($this->config);
         }
 
         return false;
@@ -146,6 +158,36 @@ class Item implements ItemInterface
     public function setData(callable $data)
     {
         $this->data = $data;
+
+        return $this;
+    }
+
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    public function setConfig(array $config)
+    {
+       $this->config = $config;
+
+       return $this;
+    }
+
+    public function getConfigProcess(Request $request)
+    {
+        if (null !== $this->configProcess) {
+            $data = $this->configProcess;
+
+            return $data($request);
+        }
+
+        return false;
+    }
+
+    public function setConfigProcess(callable $process)
+    {
+        $this->configProcess = $process;
 
         return $this;
     }

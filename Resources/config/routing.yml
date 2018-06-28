@@ -1,5 +1,15 @@
 widget_status:
-    path: /widget/{widgetId}/{status}
+    path: /widget/status/{widgetId}/{status}
     controller: Pd\WidgetBundle\Controller\WidgetController::status
-    defaults:
-        status: true
+    requirements:
+        status: \d+
+
+widget_config:
+    path: /widget/config/{widgetId}
+    controller: Pd\WidgetBundle\Controller\WidgetController::configs
+
+widget_order:
+    path: /widget/order/{widgetId}/{order}
+    controller: Pd\WidgetBundle\Controller\WidgetController::order
+    requirements:
+        order: \d+

@@ -24,8 +24,8 @@ class WidgetController extends Controller
      * Change Widget Status.
      *
      * @param Request $request
-     * @param string  $widgetId
-     * @param bool    $status
+     * @param string $widgetId
+     * @param bool $status
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -40,9 +40,8 @@ class WidgetController extends Controller
                     ->getRepository('PdWidgetBundle:WidgetUser')
                     ->findOneBy(['owner' => $this->getUser()]) ?? (new WidgetUser())->setOwner($this->getUser());
 
-            $widgetConfig->addWidgetConfig($widgetId, [
-                'status' => $status,
-            ]);
+            // Add Config Parameters
+            $widgetConfig->addWidgetConfig($widgetId, ['status' => $status]);
 
             // Save
             $em = $this->getDoctrine()->getManager();
@@ -51,8 +50,63 @@ class WidgetController extends Controller
         }
 
         // Response
-        $redirect = $request->headers->get('referer') ?? $this->generateUrl($this->getParameter('pd_widget.return_route'));
+        return $this->redirect($request->headers->get('referer') ?? $this->generateUrl($this->getParameter('pd_widget.return_route')));
+    }
 
-        return $this->redirect($redirect);
+    /**
+     * Change Widget Configuration
+     *
+     * @param Request $request
+     * @param string $widgetId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function configs(Request $request, string $widgetId)
+    {
+        // Build Widget
+        $widgets = $this->get('pd_widget.core')->getWidgets();
+
+        if (isset($widgets[$widgetId])) {
+            // Get User Widgets
+            $widgetConfig = $this->getDoctrine()
+                    ->getRepository('PdWidgetBundle:WidgetUser')
+                    ->findOneBy(['owner' => $this->getUser()]) ?? (new WidgetUser())->setOwner($this->getUser());
+
+            // Add Config Parameters
+            $widgetConfig->addWidgetConfig($widgetId, $widgets[$widgetId]->getConfigProcess($request) ?? []);
+
+            // Save
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($widgetConfig);
+            $em->flush();
+        }
+
+        // Response
+        return $this->redirect($request->headers->get('referer') ?? $this->generateUrl($this->getParameter('pd_widget.return_route')));
+    }
+
+    public function order(Request $request, string $widgetId, int $order)
+    {
+        // Build Widget
+        $widgets = $this->get('pd_widget.core')->getWidgets();
+
+        if (isset($widgets[$widgetId])) {
+            // Get User Widgets
+            $widgetConfig = $this->getDoctrine()
+                    ->getRepository('PdWidgetBundle:WidgetUser')
+                    ->findOneBy(['owner' => $this->getUser()]) ?? (new WidgetUser())->setOwner($this->getUser());
+
+            // Add Config Parameters
+            $widgetConfig->addWidgetConfig($widgetId, ['order' => $order]);
+
+            // Save
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($widgetConfig);
+            $em->flush();
+        }
+
+        // Response
+        return $this->json([
+            'result' => 'success'
+        ]);
     }
 }

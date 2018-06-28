@@ -41,7 +41,7 @@ class WidgetBuilder implements WidgetBuilderInterface
      * WidgetBuilder constructor.
      *
      * @param EntityManagerInterface $entityManager
-     * @param TokenStorageInterface  $tokenStorage
+     * @param TokenStorageInterface $tokenStorage
      */
     public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage)
     {
@@ -54,7 +54,7 @@ class WidgetBuilder implements WidgetBuilderInterface
      *
      * @param $widgets ItemInterface[]
      * @param string $widgetGroup
-     * @param array  $widgetId
+     * @param array $widgetId
      *
      * @return ItemInterface[]
      */
@@ -75,6 +75,12 @@ class WidgetBuilder implements WidgetBuilderInterface
         if ($widgetId) {
             foreach ($widgetId as $id) {
                 if (isset($widgets[$id])) {
+                    // Activate
+                    $widgets[$id]->setActive($this->widgetConfig[$widget->getId()]['status'] ?? false);
+
+                    // Set Widget Config
+                    $widgets[$id]->setConfig($this->widgetConfig[$widget->getId()] ?? []);
+
                     $outputWidget[] = $widgets[$id];
                 }
             }
@@ -85,6 +91,11 @@ class WidgetBuilder implements WidgetBuilderInterface
         foreach ($widgets as $widget) {
             if ('' !== $widgetGroup && $widget->getGroup() !== $widgetGroup) {
                 continue;
+            }
+
+            // Set Custom Order
+            if (isset($this->widgetConfig[$widget->getId()]['order'])) {
+                $widget->setOrder($this->widgetConfig[$widget->getId()]['order']);
             }
 
             // Order
@@ -100,6 +111,9 @@ class WidgetBuilder implements WidgetBuilderInterface
 
             // Activate
             $widget->setActive($this->widgetConfig[$widget->getId()]['status'] ?? false);
+
+            // Set Widget Config
+            $widget->setConfig($this->widgetConfig[$widget->getId()] ?? []);
         }
 
         // Sort

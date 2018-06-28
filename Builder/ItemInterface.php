@@ -13,6 +13,7 @@
  */
 
 namespace Pd\WidgetBundle\Builder;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Widget Builder Interface.
@@ -107,6 +108,30 @@ interface ItemInterface
      * @return ItemInterface
      */
     public function setData(callable $data);
+
+    /**
+     * @return array|null
+     */
+    public function getConfig();
+
+    /**
+     * @param array $config
+     *
+     * @return ItemInterface
+     */
+    public function setConfig(array $config);
+
+    /**
+     * @return array
+     */
+    public function getConfigProcess(Request $request);
+
+    /**
+     * @param callable $parameters
+     *
+     * @return ItemInterface
+     */
+    public function setConfigProcess(callable $process);
 
     /**
      * Get Order Number.
