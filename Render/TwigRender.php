@@ -15,6 +15,7 @@
 namespace Pd\WidgetBundle\Render;
 
 use Pd\WidgetBundle\Builder\ItemInterface;
+use Psr\Cache\CacheItemPoolInterface;
 
 /**
  * Class WidgetRender.
@@ -34,14 +35,20 @@ class TwigRender implements RenderInterface
     private $baseTemplate;
 
     /**
+     * @var CacheItemPoolInterface
+     */
+    private $cache;
+
+    /**
      * WidgetRender constructor.
      *
      * @param \Twig_Environment $engine
-     * @param string            $baseTemplate
+     * @param string $baseTemplate
      */
-    public function __construct(\Twig_Environment $engine, string $baseTemplate)
+    public function __construct(\Twig_Environment $engine, CacheItemPoolInterface $cache, string $baseTemplate)
     {
         $this->engine = $engine;
+        $this->cache = $cache;
         $this->baseTemplate = $baseTemplate;
     }
 
@@ -67,7 +74,8 @@ class TwigRender implements RenderInterface
         $output = '';
 
         foreach ($widgets as $widget) {
-            $output .= $widget->getTemplate() ? $this->engine->render($widget->getTemplate(), ['widget' => $widget]) : $widget->getContent();
+            if ($widget->isActive())
+                $output .= $this->getOutput($widget);
         }
 
         // Render Base
@@ -76,5 +84,26 @@ class TwigRender implements RenderInterface
         }
 
         return $output;
+    }
+
+    public function getOutput(ItemInterface $item)
+    {
+        if ($item->getCacheTime()) {
+            // Get Cache Item
+            $cache = $this->cache->getItem($item->getId());
+
+            // Set Cache Expires
+            $cache->expiresAfter($item->getCacheTime());
+
+            // Save
+            if (false === $cache->isHit()) {
+                $cache->set($item->getTemplate() ? $this->engine->render($item->getTemplate(), ['widget' => $item]) : $item->getContent());
+                $this->cache->save($cache);
+            }
+
+            return $cache->get();
+        } else {
+            return $item->getTemplate() ? $this->engine->render($item->getTemplate(), ['widget' => $item]) : $item->getContent();
+        }
     }
 }

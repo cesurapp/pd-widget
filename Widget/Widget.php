@@ -44,8 +44,13 @@ class Widget implements WidgetInterface
     private $eventDispatcher;
 
     /**
+     * @var bool
+     */
+    private $checkRole;
+
+    /**
      * @param AuthorizationCheckerInterface $security
-     * @param EventDispatcherInterface      $eventDispatcher
+     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(AuthorizationCheckerInterface $security, EventDispatcherInterface $eventDispatcher)
     {
@@ -58,8 +63,11 @@ class Widget implements WidgetInterface
      *
      * @return array|ItemInterface[]
      */
-    public function getWidgets()
+    public function getWidgets($checkRole = true)
     {
+        // Check Role
+        $this->checkRole = $checkRole;
+
         // Dispatch Event
         if (!$this->widgets) {
             $this->eventDispatcher->dispatch(WidgetEvent::WIDGET_START, new WidgetEvent($this));
@@ -78,8 +86,10 @@ class Widget implements WidgetInterface
     public function addWidget(ItemInterface $item)
     {
         // Check Security
-        if ($item->getRole() && !$this->security->isGranted($item->getRole())) {
-            return $this;
+        if ($this->checkRole) {
+            if ($item->getRole() && !$this->security->isGranted($item->getRole())) {
+                return $this;
+            }
         }
 
         // Add

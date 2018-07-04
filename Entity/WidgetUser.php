@@ -79,13 +79,32 @@ class WidgetUser
      * Add Widget Config.
      *
      * @param string $widgetId
-     * @param array  $config
+     * @param array $config
      *
      * @return $this
      */
     public function addWidgetConfig(string $widgetId, array $config = [])
     {
         $this->config[$widgetId] = array_merge($this->config[$widgetId] ?? [], $config);
+
+        return $this;
+    }
+
+    /**
+     * Remove Widget Config.
+     *
+     * @param string $widgetId
+     * @param array $ids
+     *
+     * @return $this
+     */
+    public function removeWidgetConfig(string $widgetId, array $config = [])
+    {
+        foreach ($config as $id => $content) {
+            if (isset($this->config[$widgetId][$id])) {
+                unset($this->config[$widgetId][$id]);
+            }
+        }
 
         return $this;
     }

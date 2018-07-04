@@ -84,11 +84,17 @@ class Item implements ItemInterface
     private $active = false;
 
     /**
+     * @var int|bool
+     */
+    private $cacheExpires;
+
+    /**
      * @param mixed $id
      */
-    public function __construct($id)
+    public function __construct($id, $cacheExpires = 3600)
     {
         $this->id = $id;
+        $this->cacheExpires = $cacheExpires;
     }
 
     public function getId()
@@ -236,6 +242,18 @@ class Item implements ItemInterface
     public function setGroup(string $name)
     {
         $this->group = $name;
+
+        return $this;
+    }
+
+    public function getCacheTime()
+    {
+        return $this->cacheExpires;
+    }
+
+    public function setCacheTime($cacheExpires)
+    {
+        $this->cacheExpires = $cacheExpires;
 
         return $this;
     }

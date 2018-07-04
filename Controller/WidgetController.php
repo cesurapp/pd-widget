@@ -71,13 +71,20 @@ class WidgetController extends Controller
                     ->getRepository('PdWidgetBundle:WidgetUser')
                     ->findOneBy(['owner' => $this->getUser()]) ?? (new WidgetUser())->setOwner($this->getUser());
 
-            // Add Config Parameters
-            $widgetConfig->addWidgetConfig($widgetId, $widgets[$widgetId]->getConfigProcess($request) ?? []);
+            // Add or Remove Config Parameters
+            if ($request->get('remove')) {
+                $widgetConfig->removeWidgetConfig($widgetId, $widgets[$widgetId]->getConfigProcess($request) ?? []);
+            } else {
+                $widgetConfig->addWidgetConfig($widgetId, $widgets[$widgetId]->getConfigProcess($request) ?? []);
+            }
 
             // Save
             $em = $this->getDoctrine()->getManager();
             $em->persist($widgetConfig);
             $em->flush();
+
+            // Flush Widget Cache
+            $this->get('cache.app')->deleteItem($widgetId);
         }
 
         // Response

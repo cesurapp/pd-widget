@@ -196,4 +196,15 @@ interface ItemInterface
      * @return ItemInterface
      */
     public function setGroup(string $name);
+
+    /**
+     * @return bool|int
+     */
+    public function getCacheTime();
+
+    /**
+     * @param $time int|bool
+     * @return ItemInterface
+     */
+    public function setCacheTime($time);
 }

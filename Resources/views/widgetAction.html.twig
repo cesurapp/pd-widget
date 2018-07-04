@@ -1,14 +1,14 @@
-<ul class="nav widget-nav">
+<ul class="nav widget-nav {{ bgcolor is defined ? bgcolor }}">
     {%  if block('add_config') is not empty %}
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"><i class="material-icons">settings</i></a>
+            <a class="nav-link dropdown-toggle {{ color is defined ? color }}" data-toggle="dropdown" href="#"><i class="material-icons">settings</i></a>
             <div class="dropdown-menu dropdown-menu-right">
                 {% block add_config %}{% endblock %}
             </div>
         </li>
     {% endif %}
     {% block add %}{% endblock %}
-    <li class="nav-item"><a href="#" class="nav-link mover"><i class="material-icons">open_with</i></a></li>
-    <li class="nav-item"><a href="#" data-toggle="popover" title="{{ widget.name|trans }}" data-content="{{ widget.description|trans }}" class="nav-link"><i class="material-icons">help</i></a></li>
-    <li class="nav-item"><a href="{{ path('widget_status', { 'widgetId': widget.id, 'status': widget.isActive ? 0 : 1 }) }}" class="nav-link"><i class="material-icons">close</i></a></li>
+    <li class="nav-item"><a class="nav-link mover {{ color is defined ? color }}" href="#"><i class="material-icons">open_with</i></a></li>
+    <li class="nav-item"><a class="nav-link {{ color is defined ? color }}" href="#" data-toggle="popover" title="{{ widget.name|trans }}" data-content="{{ widget.description|trans }}"><i class="material-icons">help</i></a></li>
+    <li class="nav-item"><a class="nav-link {{ color is defined ? color }}" href="{{ path('widget_status', { 'widgetId': widget.id, 'status': widget.isActive ? 0 : 1 }) }}"><i class="material-icons">close</i></a></li>
 </ul>
