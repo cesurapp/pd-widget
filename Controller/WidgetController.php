@@ -84,7 +84,7 @@ class WidgetController extends Controller
             $em->flush();
 
             // Flush Widget Cache
-            $this->get('cache.app')->deleteItem($widgetId);
+            $this->get('cache.app')->deleteItem($widgetId . $this->getUser()->getId());
         }
 
         // Response

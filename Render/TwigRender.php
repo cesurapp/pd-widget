@@ -16,6 +16,7 @@ namespace Pd\WidgetBundle\Render;
 
 use Pd\WidgetBundle\Builder\ItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Class WidgetRender.
@@ -40,15 +41,21 @@ class TwigRender implements RenderInterface
     private $cache;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * WidgetRender constructor.
      *
      * @param \Twig_Environment $engine
      * @param string $baseTemplate
      */
-    public function __construct(\Twig_Environment $engine, CacheItemPoolInterface $cache, string $baseTemplate)
+    public function __construct(\Twig_Environment $engine, CacheItemPoolInterface $cache, TokenStorageInterface $tokenStorage, string $baseTemplate)
     {
         $this->engine = $engine;
         $this->cache = $cache;
+        $this->tokenStorage = $tokenStorage;
         $this->baseTemplate = $baseTemplate;
     }
 
@@ -73,9 +80,12 @@ class TwigRender implements RenderInterface
         // Output Storage
         $output = '';
 
+        // Get User ID
+        $userId = $this->tokenStorage->getToken()->getUser()->getId();
+
         foreach ($widgets as $widget) {
             if ($widget->isActive())
-                $output .= $this->getOutput($widget);
+                $output .= $this->getOutput($widget, $userId);
         }
 
         // Render Base
@@ -86,11 +96,11 @@ class TwigRender implements RenderInterface
         return $output;
     }
 
-    public function getOutput(ItemInterface $item)
+    public function getOutput(ItemInterface $item, $userId)
     {
         if ($item->getCacheTime()) {
             // Get Cache Item
-            $cache = $this->cache->getItem($item->getId());
+            $cache = $this->cache->getItem($item->getId() . $userId);
 
             // Set Cache Expires
             $cache->expiresAfter($item->getCacheTime());

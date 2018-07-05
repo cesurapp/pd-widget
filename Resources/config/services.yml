@@ -8,6 +8,7 @@ services:
         arguments:
             $engine: '@twig'
             $cache: '@cache.app'
+            $tokenStorage: '@security.token_storage'
             $baseTemplate: ''
 
     # Builder Service
