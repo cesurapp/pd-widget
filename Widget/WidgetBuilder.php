@@ -41,7 +41,7 @@ class WidgetBuilder implements WidgetBuilderInterface
      * WidgetBuilder constructor.
      *
      * @param EntityManagerInterface $entityManager
-     * @param TokenStorageInterface $tokenStorage
+     * @param TokenStorageInterface  $tokenStorage
      */
     public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage)
     {
@@ -54,7 +54,7 @@ class WidgetBuilder implements WidgetBuilderInterface
      *
      * @param $widgets ItemInterface[]
      * @param string $widgetGroup
-     * @param array $widgetId
+     * @param array  $widgetId
      *
      * @return ItemInterface[]
      */

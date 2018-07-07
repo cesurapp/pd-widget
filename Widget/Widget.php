@@ -50,7 +50,7 @@ class Widget implements WidgetInterface
 
     /**
      * @param AuthorizationCheckerInterface $security
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param EventDispatcherInterface      $eventDispatcher
      */
     public function __construct(AuthorizationCheckerInterface $security, EventDispatcherInterface $eventDispatcher)
     {

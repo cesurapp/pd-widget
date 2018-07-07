@@ -1,10 +1,10 @@
 # pdWidget Bundle
 Flexible widget system for Symfony 4+. 
 
-[![Latest Stable Version](https://poser.pugx.org/rmznpydn/pd-widget/v/stable)](https://packagist.org/packages/rmznpydn/pd-widget)
-[![Total Downloads](https://poser.pugx.org/rmznpydn/pd-widget/downloads)](https://packagist.org/packages/rmznpydn/pd-widget)
-[![Latest Unstable Version](https://poser.pugx.org/rmznpydn/pd-widget/v/unstable)](https://packagist.org/packages/rmznpydn/pd-widget)
-[![License](https://poser.pugx.org/rmznpydn/pd-widget/license)](https://packagist.org/packages/rmznpydn/pd-widget)
+[![Packagist](https://img.shields.io/packagist/dt/rmznpydn/pd-widget.svg)](https://github.com/rmznpydn/pd-widget)
+[![Github Release](https://img.shields.io/github/release/rmznpydn/pd-widget.svg)](https://github.com/rmznpydn/pd-widget)
+[![license](https://img.shields.io/github/license/rmznpydn/pd-widget.svg)](https://github.com/rmznpydn/pd-widget)
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/rmznpydn/pd-widget.svg)](https://github.com/rmznpydn/pd-widget)
 
 Installation
 ---

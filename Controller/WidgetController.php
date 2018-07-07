@@ -24,8 +24,8 @@ class WidgetController extends Controller
      * Change Widget Status.
      *
      * @param Request $request
-     * @param string $widgetId
-     * @param bool $status
+     * @param string  $widgetId
+     * @param bool    $status
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -54,10 +54,11 @@ class WidgetController extends Controller
     }
 
     /**
-     * Change Widget Configuration
+     * Change Widget Configuration.
      *
      * @param Request $request
-     * @param string $widgetId
+     * @param string  $widgetId
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function configs(Request $request, string $widgetId)
@@ -84,7 +85,7 @@ class WidgetController extends Controller
             $em->flush();
 
             // Flush Widget Cache
-            $this->get('cache.app')->deleteItem($widgetId . $this->getUser()->getId());
+            $this->get('cache.app')->deleteItem($widgetId.$this->getUser()->getId());
         }
 
         // Response
@@ -113,7 +114,7 @@ class WidgetController extends Controller
 
         // Response
         return $this->json([
-            'result' => 'success'
+            'result' => 'success',
         ]);
     }
 }

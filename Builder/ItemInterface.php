@@ -13,6 +13,7 @@
  */
 
 namespace Pd\WidgetBundle\Builder;
+
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -204,6 +205,7 @@ interface ItemInterface
 
     /**
      * @param $time int|bool
+     *
      * @return ItemInterface
      */
     public function setCacheTime($time);

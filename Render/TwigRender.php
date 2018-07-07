@@ -49,7 +49,7 @@ class TwigRender implements RenderInterface
      * WidgetRender constructor.
      *
      * @param \Twig_Environment $engine
-     * @param string $baseTemplate
+     * @param string            $baseTemplate
      */
     public function __construct(\Twig_Environment $engine, CacheItemPoolInterface $cache, TokenStorageInterface $tokenStorage, string $baseTemplate)
     {
@@ -84,8 +84,9 @@ class TwigRender implements RenderInterface
         $userId = $this->tokenStorage->getToken()->getUser()->getId();
 
         foreach ($widgets as $widget) {
-            if ($widget->isActive())
+            if ($widget->isActive()) {
                 $output .= $this->getOutput($widget, $userId);
+            }
         }
 
         // Render Base
@@ -100,7 +101,7 @@ class TwigRender implements RenderInterface
     {
         if ($item->getCacheTime()) {
             // Get Cache Item
-            $cache = $this->cache->getItem($item->getId() . $userId);
+            $cache = $this->cache->getItem($item->getId().$userId);
 
             // Set Cache Expires
             $cache->expiresAfter($item->getCacheTime());
@@ -112,8 +113,8 @@ class TwigRender implements RenderInterface
             }
 
             return $cache->get();
-        } else {
-            return $item->getTemplate() ? $this->engine->render($item->getTemplate(), ['widget' => $item]) : $item->getContent();
         }
+
+        return $item->getTemplate() ? $this->engine->render($item->getTemplate(), ['widget' => $item]) : $item->getContent();
     }
 }

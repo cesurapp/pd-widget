@@ -19,7 +19,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Pd\WidgetBundle\Repository\WidgetUserRepository")
  * @ORM\Table(name="widget_user")
- *
  */
 class WidgetUser
 {
@@ -79,7 +78,7 @@ class WidgetUser
      * Add Widget Config.
      *
      * @param string $widgetId
-     * @param array $config
+     * @param array  $config
      *
      * @return $this
      */
@@ -94,7 +93,7 @@ class WidgetUser
      * Remove Widget Config.
      *
      * @param string $widgetId
-     * @param array $ids
+     * @param array  $ids
      *
      * @return $this
      */

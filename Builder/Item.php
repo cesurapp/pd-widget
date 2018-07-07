@@ -175,9 +175,9 @@ class Item implements ItemInterface
 
     public function setConfig(array $config)
     {
-       $this->config = $config;
+        $this->config = $config;
 
-       return $this;
+        return $this;
     }
 
     public function getConfigProcess(Request $request)
