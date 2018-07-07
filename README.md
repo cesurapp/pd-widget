@@ -95,7 +95,7 @@ class Dashboard
 
         // Add Widgets
         $widgets
-            ->addWidget((new Item('user_info'))
+            ->addWidget((new Item('user_info', 3600)) // Add Cache Time or Default 3600 Second
                 ->setGroup('admin')
                 ->setName('widget_user_info.name')
                 ->setDescription('widget_user_info.description')
