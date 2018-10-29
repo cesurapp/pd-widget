@@ -1,10 +1,10 @@
 # pdWidget Bundle
 Flexible widget system for Symfony 4+. 
 
-[![Packagist](https://img.shields.io/packagist/dt/rmznpydn/pd-widget.svg)](https://github.com/rmznpydn/pd-widget)
-[![Github Release](https://img.shields.io/github/release/rmznpydn/pd-widget.svg)](https://github.com/rmznpydn/pd-widget)
-[![license](https://img.shields.io/github/license/rmznpydn/pd-widget.svg)](https://github.com/rmznpydn/pd-widget)
-[![PHP from Packagist](https://img.shields.io/packagist/php-v/rmznpydn/pd-widget.svg)](https://github.com/rmznpydn/pd-widget)
+[![Packagist](https://img.shields.io/packagist/dt/appaydin/pd-widget.svg)](https://github.com/appaydin/pd-widget)
+[![Github Release](https://img.shields.io/github/release/appaydin/pd-widget.svg)](https://github.com/appaydin/pd-widget)
+[![license](https://img.shields.io/github/license/appaydin/pd-widget.svg)](https://github.com/appaydin/pd-widget)
+[![PHP from Packagist](https://img.shields.io/packagist/php-v/appaydin/pd-widget.svg)](https://github.com/appaydin/pd-widget)
 
 Installation
 ---
@@ -15,7 +15,7 @@ Open a command console, enter your project directory and execute the
 following command to download the latest stable version of this bundle:
 
 ```console
-$ composer require rmznpydn/pd-widget
+$ composer require appaydin/pd-widget
 ```
 
 This command requires you to have Composer installed globally, as explained
