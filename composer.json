@@ -1,5 +1,5 @@
 {
-  "name": "rmznpydn/pd-widget",
+  "name": "appaydin/pd-widget",
   "description": "Symfony Simple Widget Bundle",
   "type": "symfony-bundle",
   "license": "MIT",
@@ -10,7 +10,7 @@
     "symfony-widget",
     "admin-widget"
   ],
-  "homepage": "https://github.com/rmznpydn/pd-widget",
+  "homepage": "https://github.com/appaydin/pd-widget",
   "authors": [
     {
       "name": "Ramazan APAYDIN",
