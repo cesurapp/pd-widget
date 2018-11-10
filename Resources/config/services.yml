@@ -20,7 +20,7 @@ services:
     pd_widget.core:
         public: true
         class: Pd\WidgetBundle\Widget\Widget
-        arguments: ['@security.authorization_checker', '@event_dispatcher']
+        arguments: ['@security.authorization_checker', '@event_dispatcher', '@cache.app', '@security.token_storage']
 
     # Twig Extension
     pd_widget.twig_extension:

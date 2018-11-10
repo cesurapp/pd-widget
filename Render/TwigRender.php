@@ -1,15 +1,14 @@
 <?php
 
 /**
- * This file is part of the pdAdmin pdWidget package.
+ * This file is part of the pd-admin pd-widget package.
  *
- * @package     pdWidget
+ * @package     pd-widget
  *
- * @author      Ramazan APAYDIN <iletisim@ramazanapaydin.com>
- * @copyright   Copyright (c) 2018 Ramazan APAYDIN
  * @license     LICENSE
+ * @author      Kerem APAYDIN <kerem@apaydin.me>
  *
- * @link        https://github.com/rmznpydn/pd-widget
+ * @link        https://github.com/appaydin/pd-widget
  */
 
 namespace Pd\WidgetBundle\Render;
@@ -19,9 +18,9 @@ use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * Class WidgetRender.
+ * Widget Twig Render.
  *
- * @author  Ramazan Apaydın <iletisim@ramazanapaydin.com>
+ * @author Kerem APAYDIN <kerem@apaydin.me>
  */
 class TwigRender implements RenderInterface
 {
@@ -97,6 +96,19 @@ class TwigRender implements RenderInterface
         return $output;
     }
 
+    /**
+     * Get Widget Output for Cache.
+     *
+     * @param ItemInterface $item
+     * @param $userId
+     *
+     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     *
+     * @return mixed|string
+     */
     public function getOutput(ItemInterface $item, $userId)
     {
         if ($item->getCacheTime()) {

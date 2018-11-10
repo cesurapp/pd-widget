@@ -1,15 +1,14 @@
 <?php
 
 /**
- * This file is part of the pdAdmin pdWidget package.
+ * This file is part of the pd-admin pd-widget package.
  *
- * @package     pdWidget
+ * @package     pd-widget
  *
- * @author      Ramazan APAYDIN <iletisim@ramazanapaydin.com>
- * @copyright   Copyright (c) 2018 Ramazan APAYDIN
  * @license     LICENSE
+ * @author      Kerem APAYDIN <kerem@apaydin.me>
  *
- * @link        https://github.com/rmznpydn/pd-widget
+ * @link        https://github.com/appaydin/pd-widget
  */
 
 namespace Pd\WidgetBundle\Entity;
@@ -17,8 +16,12 @@ namespace Pd\WidgetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Widget Private User Data.
+ *
  * @ORM\Entity(repositoryClass="Pd\WidgetBundle\Repository\WidgetUserRepository")
  * @ORM\Table(name="widget_user")
+ *
+ * @author Kerem APAYDIN <kerem@apaydin.me>
  */
 class WidgetUser
 {

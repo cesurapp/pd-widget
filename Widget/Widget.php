@@ -1,28 +1,29 @@
 <?php
 
 /**
- * This file is part of the pdAdmin pdWidget package.
+ * This file is part of the pd-admin pd-widget package.
  *
- * @package     pdWidget
+ * @package     pd-widget
  *
- * @author      Ramazan APAYDIN <iletisim@ramazanapaydin.com>
- * @copyright   Copyright (c) 2018 Ramazan APAYDIN
  * @license     LICENSE
+ * @author      Kerem APAYDIN <kerem@apaydin.me>
  *
- * @link        https://github.com/rmznpydn/pd-widget
+ * @link        https://github.com/appaydin/pd-widget
  */
 
 namespace Pd\WidgetBundle\Widget;
 
 use Pd\WidgetBundle\Builder\ItemInterface;
 use Pd\WidgetBundle\Event\WidgetEvent;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
- * Widget.
+ * Widget Main.
  *
- * @author  Ramazan Apaydın <iletisim@ramazanapaydin.com>
+ * @author Kerem APAYDIN <kerem@apaydin.me>
  */
 class Widget implements WidgetInterface
 {
@@ -49,13 +50,25 @@ class Widget implements WidgetInterface
     private $checkRole;
 
     /**
+     * @var CacheItemPoolInterface
+     */
+    private $cache;
+
+    /**
+     * @var TokenStorageInterface
+     */
+    private $token;
+
+    /**
      * @param AuthorizationCheckerInterface $security
      * @param EventDispatcherInterface      $eventDispatcher
      */
-    public function __construct(AuthorizationCheckerInterface $security, EventDispatcherInterface $eventDispatcher)
+    public function __construct(AuthorizationCheckerInterface $security, EventDispatcherInterface $eventDispatcher, CacheItemPoolInterface $cache, TokenStorageInterface $token)
     {
         $this->security = $security;
         $this->eventDispatcher = $eventDispatcher;
+        $this->cache = $cache;
+        $this->token = $token;
     }
 
     /**
@@ -112,5 +125,22 @@ class Widget implements WidgetInterface
         }
 
         return $this;
+    }
+
+    /**
+     * Clear current user widget cache.
+     *
+     * @throws \Psr\Cache\InvalidArgumentException
+     */
+    public function clearWidgetCache()
+    {
+        // Get Widgets
+        $widgets = $this->getWidgets(false);
+        $userId = $this->token->getToken()->getUser()->getId();
+
+        // Clear Cache
+        foreach ($widgets as $widget) {
+            $this->cache->deleteItem($widget->getId().$userId);
+        }
     }
 }

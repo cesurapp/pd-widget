@@ -1,20 +1,20 @@
 {
   "name": "appaydin/pd-widget",
   "description": "Symfony Simple Widget Bundle",
+  "homepage": "https://github.com/appaydin/pd-widget",
   "type": "symfony-bundle",
   "license": "MIT",
   "keywords": [
-    "pdadmin",
-    "pdwidget",
+    "pd-admin",
+    "pd-widget",
     "widget",
     "symfony-widget",
     "admin-widget"
   ],
-  "homepage": "https://github.com/appaydin/pd-widget",
   "authors": [
     {
-      "name": "Ramazan APAYDIN",
-      "homepage": "http://ramazanapaydin.com"
+      "name": "Kerem APAYDIN",
+      "homepage": "http://apaydin.me"
     }
   ],
   "require": {
