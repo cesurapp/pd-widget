@@ -13,6 +13,7 @@
 
 namespace Pd\WidgetBundle\DependencyInjection;
 
+use Pd\WidgetBundle\Render\TwigRender;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -40,7 +41,7 @@ class PdWidgetExtension extends Extension
 
         // Set Configuration
         $container
-            ->getDefinition('pd_widget.render')
+            ->getDefinition(TwigRender::class)
             ->setArgument('$baseTemplate', $config['base_template']);
     }
 }

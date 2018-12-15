@@ -14,7 +14,9 @@
 namespace Pd\WidgetBundle\Controller;
 
 use Pd\WidgetBundle\Entity\WidgetUser;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Pd\WidgetBundle\Widget\WidgetInterface;
+use Psr\SimpleCache\CacheInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -22,7 +24,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Kerem APAYDIN <kerem@apaydin.me>
  */
-class WidgetController extends Controller
+class WidgetController extends AbstractController
 {
     /**
      * Change Widget Status.
@@ -33,10 +35,10 @@ class WidgetController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function status(Request $request, string $widgetId, bool $status = true)
+    public function status(Request $request, WidgetInterface $widget, string $widgetId, bool $status = true)
     {
         // Build Widget
-        $widgets = $this->get('pd_widget.core')->getWidgets();
+        $widgets = $widget->getWidgets();
 
         if (isset($widgets[$widgetId])) {
             // Get User Widgets
@@ -65,10 +67,10 @@ class WidgetController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function configs(Request $request, string $widgetId)
+    public function configs(Request $request, WidgetInterface $widget, CacheInterface $cache, string $widgetId)
     {
         // Build Widget
-        $widgets = $this->get('pd_widget.core')->getWidgets();
+        $widgets = $widget->getWidgets();
 
         if (isset($widgets[$widgetId])) {
             // Get User Widgets
@@ -89,7 +91,7 @@ class WidgetController extends Controller
             $em->flush();
 
             // Flush Widget Cache
-            $this->get('cache.app')->deleteItem($widgetId.$this->getUser()->getId());
+            $cache->delete($widgetId.$this->getUser()->getId());
         }
 
         // Response
@@ -105,10 +107,10 @@ class WidgetController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function order(Request $request, string $widgetId, int $order)
+    public function order(Request $request, WidgetInterface $widget, string $widgetId, int $order)
     {
         // Build Widget
-        $widgets = $this->get('pd_widget.core')->getWidgets();
+        $widgets = $widget->getWidgets();
 
         if (isset($widgets[$widgetId])) {
             // Get User Widgets
