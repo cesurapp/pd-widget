@@ -127,7 +127,7 @@ interface ItemInterface
     public function getConfigProcess(Request $request);
 
     /**
-     * @param callable $parameters
+     * @param callable $process
      *
      * @return ItemInterface
      */
