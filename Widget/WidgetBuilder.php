@@ -4,10 +4,8 @@
  * This file is part of the pd-admin pd-widget package.
  *
  * @package     pd-widget
- *
  * @license     LICENSE
  * @author      Kerem APAYDIN <kerem@apaydin.me>
- *
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -80,10 +78,10 @@ class WidgetBuilder implements WidgetBuilderInterface
             foreach ($widgetId as $id) {
                 if (isset($widgets[$id])) {
                     // Activate
-                    $widgets[$id]->setActive($this->widgetConfig[$widget->getId()]['status'] ?? false);
+                    $widgets[$id]->setActive($this->widgetConfig[$id]['status'] ?? false);
 
                     // Set Widget Config
-                    $widgets[$id]->setConfig($this->widgetConfig[$widget->getId()] ?? []);
+                    $widgets[$id]->setConfig($this->widgetConfig[$id] ?? []);
 
                     $outputWidget[] = $widgets[$id];
                 }

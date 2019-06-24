@@ -4,10 +4,8 @@
  * This file is part of the pd-admin pd-widget package.
  *
  * @package     pd-widget
- *
  * @license     LICENSE
  * @author      Kerem APAYDIN <kerem@apaydin.me>
- *
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -16,6 +14,7 @@ namespace Pd\WidgetBundle\Render;
 use Pd\WidgetBundle\Builder\ItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Twig\Environment;
 
 /**
  * Widget Twig Render.
@@ -25,7 +24,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class TwigRender implements RenderInterface
 {
     /**
-     * @var \Twig_Environment
+     * @var Environment
      */
     private $engine;
 
@@ -47,10 +46,12 @@ class TwigRender implements RenderInterface
     /**
      * WidgetRender constructor.
      *
-     * @param \Twig_Environment $engine
-     * @param string            $baseTemplate
+     * @param Environment            $engine
+     * @param CacheItemPoolInterface $cache
+     * @param TokenStorageInterface  $tokenStorage
+     * @param string                 $baseTemplate
      */
-    public function __construct(\Twig_Environment $engine, CacheItemPoolInterface $cache, TokenStorageInterface $tokenStorage, string $baseTemplate)
+    public function __construct(Environment $engine, CacheItemPoolInterface $cache, TokenStorageInterface $tokenStorage, string $baseTemplate)
     {
         $this->engine = $engine;
         $this->cache = $cache;
@@ -64,13 +65,9 @@ class TwigRender implements RenderInterface
      * @param $widgets ItemInterface[]
      * @param bool $base
      *
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     *
      * @return string
      */
-    public function render($widgets, bool $base = true)
+    public function render($widgets, bool $base = true): string
     {
         if (!$widgets) {
             return false;
@@ -90,7 +87,10 @@ class TwigRender implements RenderInterface
 
         // Render Base
         if ($base) {
-            $output = $this->engine->render($this->baseTemplate, ['widgets' => $output]);
+            try {
+                $output = @$this->engine->render($this->baseTemplate, ['widgets' => $output]);
+            } catch (\Exception $e) {
+            }
         }
 
         return $output;
@@ -101,11 +101,6 @@ class TwigRender implements RenderInterface
      *
      * @param ItemInterface $item
      * @param $userId
-     *
-     * @throws \Psr\Cache\InvalidArgumentException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
      *
      * @return mixed|string
      */

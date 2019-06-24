@@ -4,10 +4,8 @@
  * This file is part of the pd-admin pd-widget package.
  *
  * @package     pd-widget
- *
  * @license     LICENSE
  * @author      Kerem APAYDIN <kerem@apaydin.me>
- *
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -15,9 +13,11 @@ namespace Pd\WidgetBundle\Controller;
 
 use Pd\WidgetBundle\Entity\WidgetUser;
 use Pd\WidgetBundle\Widget\WidgetInterface;
-use Psr\SimpleCache\CacheInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\Cache\CacheInterface;
 
 /**
  * Widget Actions.
@@ -29,13 +29,14 @@ class WidgetController extends AbstractController
     /**
      * Change Widget Status.
      *
-     * @param Request $request
-     * @param string  $widgetId
-     * @param bool    $status
+     * @param Request         $request
+     * @param WidgetInterface $widget
+     * @param string          $widgetId
+     * @param bool            $status
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
-    public function status(Request $request, WidgetInterface $widget, string $widgetId, bool $status = true)
+    public function status(Request $request, WidgetInterface $widget, string $widgetId, bool $status = true): RedirectResponse
     {
         // Build Widget
         $widgets = $widget->getWidgets();
@@ -56,18 +57,22 @@ class WidgetController extends AbstractController
         }
 
         // Response
-        return $this->redirect($request->headers->get('referer') ?? $this->generateUrl($this->getParameter('pd_widget.return_route')));
+        return $this->redirect($request->headers->get('referer', $this->generateUrl($this->getParameter('pd_widget.return_route'))));
     }
 
     /**
      * Change Widget Configuration.
      *
-     * @param Request $request
-     * @param string  $widgetId
+     * @param Request         $request
+     * @param WidgetInterface $widget
+     * @param CacheInterface  $cache
+     * @param string          $widgetId
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Psr\Cache\InvalidArgumentException
+     *
+     * @return RedirectResponse
      */
-    public function configs(Request $request, WidgetInterface $widget, CacheInterface $cache, string $widgetId)
+    public function configs(Request $request, WidgetInterface $widget, CacheInterface $cache, string $widgetId): RedirectResponse
     {
         // Build Widget
         $widgets = $widget->getWidgets();
@@ -95,19 +100,19 @@ class WidgetController extends AbstractController
         }
 
         // Response
-        return $this->redirect($request->headers->get('referer') ?? $this->generateUrl($this->getParameter('pd_widget.return_route')));
+        return $this->redirect($request->headers->get('referer', $this->generateUrl($this->getParameter('pd_widget.return_route'))));
     }
 
     /**
      * Change Widget Order.
      *
-     * @param Request $request
-     * @param string  $widgetId
-     * @param int     $order
+     * @param WidgetInterface $widget
+     * @param string          $widgetId
+     * @param int             $order
      *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @return JsonResponse
      */
-    public function order(Request $request, WidgetInterface $widget, string $widgetId, int $order)
+    public function order(WidgetInterface $widget, string $widgetId, int $order): JsonResponse
     {
         // Build Widget
         $widgets = $widget->getWidgets();

@@ -4,10 +4,8 @@
  * This file is part of the pd-admin pd-widget package.
  *
  * @package     pd-widget
- *
  * @license     LICENSE
  * @author      Kerem APAYDIN <kerem@apaydin.me>
- *
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -50,22 +48,22 @@ class Item implements ItemInterface
     /**
      * @var callable
      */
-    private $data = null;
+    private $data;
 
     /**
      * @var array
      */
-    private $config = null;
+    private $config;
 
     /**
      * @var callable
      */
-    private $configProcess = null;
+    private $configProcess;
 
     /**
      * @var int
      */
-    private $order = null;
+    private $order;
 
     /**
      * @var array;
@@ -89,6 +87,7 @@ class Item implements ItemInterface
 
     /**
      * @param mixed $id
+     * @param int   $cacheExpires
      */
     public function __construct($id, $cacheExpires = 3600)
     {

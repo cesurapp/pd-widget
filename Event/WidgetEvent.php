@@ -4,17 +4,15 @@
  * This file is part of the pd-admin pd-widget package.
  *
  * @package     pd-widget
- *
  * @license     LICENSE
  * @author      Kerem APAYDIN <kerem@apaydin.me>
- *
  * @link        https://github.com/appaydin/pd-widget
  */
 
 namespace Pd\WidgetBundle\Event;
 
 use Pd\WidgetBundle\Widget\WidgetInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Widget Events.
@@ -23,7 +21,7 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class WidgetEvent extends Event
 {
-    const WIDGET_START = 'widget.start';
+    public const WIDGET_START = 'widget.start';
 
     /**
      * @var WidgetInterface
@@ -40,7 +38,7 @@ class WidgetEvent extends Event
         $this->widget = $widget;
     }
 
-    public function getWidgetContainer()
+    public function getWidgetContainer(): WidgetInterface
     {
         return $this->widget;
     }

@@ -4,10 +4,8 @@
  * This file is part of the pd-admin pd-widget package.
  *
  * @package     pd-widget
- *
  * @license     LICENSE
  * @author      Kerem APAYDIN <kerem@apaydin.me>
- *
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -23,7 +21,7 @@ interface RenderInterface
     /**
      * @param $widgets array|false
      *
-     * @return mixed
+     * @return string
      */
-    public function render($widgets);
+    public function render($widgets): string;
 }

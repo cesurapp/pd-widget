@@ -4,10 +4,8 @@
  * This file is part of the pd-admin pd-widget package.
  *
  * @package     pd-widget
- *
  * @license     LICENSE
  * @author      Kerem APAYDIN <kerem@apaydin.me>
- *
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -16,9 +14,9 @@ namespace Pd\WidgetBundle\Widget;
 use Pd\WidgetBundle\Builder\ItemInterface;
 use Pd\WidgetBundle\Event\WidgetEvent;
 use Psr\Cache\CacheItemPoolInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Widget Main.
@@ -59,10 +57,6 @@ class Widget implements WidgetInterface
      */
     private $token;
 
-    /**
-     * @param AuthorizationCheckerInterface $security
-     * @param EventDispatcherInterface      $eventDispatcher
-     */
     public function __construct(AuthorizationCheckerInterface $security, EventDispatcherInterface $eventDispatcher, CacheItemPoolInterface $cache, TokenStorageInterface $token)
     {
         $this->security = $security;
@@ -74,6 +68,8 @@ class Widget implements WidgetInterface
     /**
      * Get Widgets.
      *
+     * @param bool $checkRole
+     *
      * @return array|ItemInterface[]
      */
     public function getWidgets($checkRole = true)
@@ -83,7 +79,7 @@ class Widget implements WidgetInterface
 
         // Dispatch Event
         if (!$this->widgets) {
-            $this->eventDispatcher->dispatch(WidgetEvent::WIDGET_START, new WidgetEvent($this));
+            $this->eventDispatcher->dispatch(new WidgetEvent($this), WidgetEvent::WIDGET_START);
         }
 
         return $this->widgets;

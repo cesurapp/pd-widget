@@ -4,10 +4,8 @@
  * This file is part of the pd-admin pd-widget package.
  *
  * @package     pd-widget
- *
  * @license     LICENSE
  * @author      Kerem APAYDIN <kerem@apaydin.me>
- *
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -48,7 +46,7 @@ class WidgetUser
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -58,9 +56,9 @@ class WidgetUser
      *
      * @param array $config
      *
-     * @return WidgetUser
+     * @return self
      */
-    public function setConfig($config)
+    public function setConfig($config): self
     {
         $this->config = $config;
 
@@ -72,7 +70,7 @@ class WidgetUser
      *
      * @return array
      */
-    public function getConfig()
+    public function getConfig(): array
     {
         return $this->config;
     }
@@ -85,7 +83,7 @@ class WidgetUser
      *
      * @return $this
      */
-    public function addWidgetConfig(string $widgetId, array $config = [])
+    public function addWidgetConfig(string $widgetId, array $config = []): self
     {
         $this->config[$widgetId] = array_merge($this->config[$widgetId] ?? [], $config);
 
@@ -96,11 +94,11 @@ class WidgetUser
      * Remove Widget Config.
      *
      * @param string $widgetId
-     * @param array  $ids
+     * @param array  $config
      *
      * @return $this
      */
-    public function removeWidgetConfig(string $widgetId, array $config = [])
+    public function removeWidgetConfig(string $widgetId, array $config = []): self
     {
         foreach ($config as $id => $content) {
             if (isset($this->config[$widgetId][$id])) {
@@ -116,9 +114,9 @@ class WidgetUser
      *
      * @param UserInterface|null $owner
      *
-     * @return WidgetUser
+     * @return $this
      */
-    public function setOwner($owner = null)
+    public function setOwner($owner = null): self
     {
         $this->owner = $owner;
 
@@ -130,7 +128,7 @@ class WidgetUser
      *
      * @return UserInterface|null
      */
-    public function getOwner()
+    public function getOwner(): ?UserInterface
     {
         return $this->owner;
     }

@@ -4,10 +4,8 @@
  * This file is part of the pd-admin pd-widget package.
  *
  * @package     pd-widget
- *
  * @license     LICENSE
  * @author      Kerem APAYDIN <kerem@apaydin.me>
- *
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -17,13 +15,15 @@ use Pd\WidgetBundle\Builder\ItemInterface;
 use Pd\WidgetBundle\Render\RenderInterface;
 use Pd\WidgetBundle\Widget\WidgetBuilderInterface;
 use Pd\WidgetBundle\Widget\WidgetInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Widget Twig Extension.
  *
  * @author Kerem APAYDIN <kerem@apaydin.me>
  */
-class WidgetExtension extends \Twig_Extension
+class WidgetExtension extends AbstractExtension
 {
     /**
      * @var RenderInterface
@@ -55,8 +55,8 @@ class WidgetExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('pd_widget_render', [$this, 'renderWidget'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('pd_widget_get', [$this, 'getWidget']),
+            new TwigFunction('pd_widget_render', [$this, 'renderWidget'], ['is_safe' => ['html']]),
+            new TwigFunction('pd_widget_get', [$this, 'getWidget']),
         ];
     }
 
@@ -68,7 +68,7 @@ class WidgetExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function renderWidget(string $widgetGroup = '', array $widgetId = [])
+    public function renderWidget(string $widgetGroup = '', array $widgetId = []): string
     {
         $widgets = $this->widgetBuilder->build($this->widgets->getWidgets(), $widgetGroup, $widgetId);
 
@@ -83,7 +83,7 @@ class WidgetExtension extends \Twig_Extension
      *
      * @return ItemInterface[]
      */
-    public function getWidget(string $widgetGroup = '', array $widgetId = [])
+    public function getWidget(string $widgetGroup = '', array $widgetId = []): array
     {
         return $this->widgetBuilder->build($this->widgets->getWidgets(), $widgetGroup, $widgetId);
     }
