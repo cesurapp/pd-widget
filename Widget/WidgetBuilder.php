@@ -60,7 +60,7 @@ class WidgetBuilder implements WidgetBuilderInterface
      *
      * @return ItemInterface[]
      */
-    public function build($widgets, string $widgetGroup = '', array $widgetId = [])
+    public function build($widgets, string $widgetGroup = '', array $widgetId = [], bool $render = false)
     {
         // Without Widgets
         if (!$widgets) {
@@ -91,7 +91,14 @@ class WidgetBuilder implements WidgetBuilderInterface
         }
 
         foreach ($widgets as $widget) {
-            if ('' !== $widgetGroup && $widget->getGroup() !== $widgetGroup) {
+            // Activate
+            $widget->setActive($this->widgetConfig[$widget->getId()]['status'] ?? false);
+
+            // Set Widget Config
+            $widget->setConfig($this->widgetConfig[$widget->getId()] ?? []);
+
+            // Enable
+            if ('' !== $widgetGroup && $widget->getGroup() !== $widgetGroup || ($render && !$widget->isActive())) {
                 continue;
             }
 
@@ -110,12 +117,6 @@ class WidgetBuilder implements WidgetBuilderInterface
             } else {
                 $outputWidget[] = $widget;
             }
-
-            // Activate
-            $widget->setActive($this->widgetConfig[$widget->getId()]['status'] ?? false);
-
-            // Set Widget Config
-            $widget->setConfig($this->widgetConfig[$widget->getId()] ?? []);
         }
 
         // Sort

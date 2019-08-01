@@ -70,7 +70,7 @@ class WidgetExtension extends AbstractExtension
      */
     public function renderWidget(string $widgetGroup = '', array $widgetId = []): string
     {
-        $widgets = $this->widgetBuilder->build($this->widgets->getWidgets(), $widgetGroup, $widgetId);
+        $widgets = $this->widgetBuilder->build($this->widgets->getWidgets(), $widgetGroup, $widgetId, true);
 
         return $this->engine->render($widgets);
     }
@@ -85,6 +85,6 @@ class WidgetExtension extends AbstractExtension
      */
     public function getWidget(string $widgetGroup = '', array $widgetId = []): array
     {
-        return $this->widgetBuilder->build($this->widgets->getWidgets(), $widgetGroup, $widgetId);
+        return $this->widgetBuilder->build($this->widgets->getWidgets(), $widgetGroup, $widgetId, false);
     }
 }
