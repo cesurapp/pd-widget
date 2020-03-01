@@ -14,9 +14,9 @@ namespace Pd\WidgetBundle\Entity;
 /**
  * User Interface.
  *
- * @author Kerem APAYDIN <kerem@apaydin.me>
+ * @author Ramazan APAYDIN <apaydin541@gmail.me>
  */
 interface UserInterface
-{
+{ 
     public function getId(): int;
 }
