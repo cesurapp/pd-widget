@@ -5,7 +5,7 @@
  *
  * @package     pd-widget
  * @license     LICENSE
- * @author      Kerem APAYDIN <kerem@apaydin.me>
+ * @author      Ramazan APAYDIN <apaydin541@gmail.com>
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Widget Builder Interface.
  *
- * @author Kerem APAYDIN <kerem@apaydin.me>
+ * @author Ramazan APAYDIN <apaydin541@gmail.com>
  */
 interface ItemInterface
 {
@@ -29,15 +29,11 @@ interface ItemInterface
 
     /**
      * Get Item Name.
-     *
-     * @return string
      */
     public function getName(): string;
 
     /**
      * Set Item Name.
-     *
-     * @param string $name
      *
      * @return ItemInterface
      */
@@ -45,15 +41,11 @@ interface ItemInterface
 
     /**
      * Get Item Description.
-     *
-     * @return string
      */
     public function getDescription(): string;
 
     /**
      * Set Item Description.
-     *
-     * @param string $description
      *
      * @return ItemInterface
      */
@@ -61,15 +53,11 @@ interface ItemInterface
 
     /**
      * Get Item Content.
-     *
-     * @return string
      */
     public function getContent(): string;
 
     /**
      * Set Item Content.
-     *
-     * @param string $content
      *
      * @return ItemInterface
      */
@@ -77,15 +65,11 @@ interface ItemInterface
 
     /**
      * Get Item Template.
-     *
-     * @return string
      */
     public function getTemplate(): string;
 
     /**
      * Set Item Template.
-     *
-     * @param string $template
      *
      * @return ItemInterface
      */
@@ -101,8 +85,6 @@ interface ItemInterface
     /**
      * Set Content Data.
      *
-     * @param callable $data
-     *
      * @return ItemInterface
      */
     public function setData(callable $data);
@@ -113,8 +95,6 @@ interface ItemInterface
     public function getConfig();
 
     /**
-     * @param array $config
-     *
      * @return ItemInterface
      */
     public function setConfig(array $config);
@@ -125,8 +105,6 @@ interface ItemInterface
     public function getConfigProcess(Request $request);
 
     /**
-     * @param callable $process
-     *
      * @return ItemInterface
      */
     public function setConfigProcess(callable $process);
@@ -141,23 +119,17 @@ interface ItemInterface
     /**
      * Set Order Number.
      *
-     * @param int $order
-     *
      * @return ItemInterface
      */
     public function setOrder(int $order);
 
     /**
      * Get Access Role.
-     *
-     * @return array
      */
     public function getRole(): array;
 
     /**
      * Set Access Role.
-     *
-     * @param array $role
      *
      * @return ItemInterface
      */
@@ -165,15 +137,11 @@ interface ItemInterface
 
     /**
      * Get Item Status.
-     *
-     * @return bool
      */
     public function isActive(): bool;
 
     /**
      * Set Item Status.
-     *
-     * @param bool $status
      *
      * @return ItemInterface
      */
@@ -181,15 +149,11 @@ interface ItemInterface
 
     /**
      * Get Item Group.
-     *
-     * @return string
      */
     public function getGroup(): string;
 
     /**
      * Set Item Group Name.
-     *
-     * @param string $name
      *
      * @return ItemInterface
      */

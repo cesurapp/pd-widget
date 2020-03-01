@@ -5,7 +5,7 @@
  *
  * @package     pd-widget
  * @license     LICENSE
- * @author      Kerem APAYDIN <kerem@apaydin.me>
+ * @author      Ramazan APAYDIN <apaydin541@gmail.com>
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Widget Item Builder.
  *
- * @author Kerem APAYDIN <kerem@apaydin.me>
+ * @author Ramazan APAYDIN <apaydin541@gmail.com>
  */
 class Item implements ItemInterface
 {

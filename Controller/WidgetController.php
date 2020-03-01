@@ -5,7 +5,7 @@
  *
  * @package     pd-widget
  * @license     LICENSE
- * @author      Kerem APAYDIN <kerem@apaydin.me>
+ * @author      Ramazan APAYDIN <apaydin541@gmail.com>
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -22,19 +22,12 @@ use Symfony\Contracts\Cache\CacheInterface;
 /**
  * Widget Actions.
  *
- * @author Kerem APAYDIN <kerem@apaydin.me>
+ * @author Ramazan APAYDIN <apaydin541@gmail.com>
  */
 class WidgetController extends AbstractController
 {
     /**
      * Change Widget Status.
-     *
-     * @param Request         $request
-     * @param WidgetInterface $widget
-     * @param string          $widgetId
-     * @param bool            $status
-     *
-     * @return RedirectResponse
      */
     public function status(Request $request, WidgetInterface $widget, string $widgetId, bool $status = true): RedirectResponse
     {
@@ -63,14 +56,7 @@ class WidgetController extends AbstractController
     /**
      * Change Widget Configuration.
      *
-     * @param Request         $request
-     * @param WidgetInterface $widget
-     * @param CacheInterface  $cache
-     * @param string          $widgetId
-     *
      * @throws \Psr\Cache\InvalidArgumentException
-     *
-     * @return RedirectResponse
      */
     public function configs(Request $request, WidgetInterface $widget, CacheInterface $cache, string $widgetId): RedirectResponse
     {
@@ -105,12 +91,6 @@ class WidgetController extends AbstractController
 
     /**
      * Change Widget Order.
-     *
-     * @param WidgetInterface $widget
-     * @param string          $widgetId
-     * @param int             $order
-     *
-     * @return JsonResponse
      */
     public function order(WidgetInterface $widget, string $widgetId, int $order): JsonResponse
     {

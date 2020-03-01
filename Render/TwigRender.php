@@ -5,7 +5,7 @@
  *
  * @package     pd-widget
  * @license     LICENSE
- * @author      Kerem APAYDIN <kerem@apaydin.me>
+ * @author      Ramazan APAYDIN <apaydin541@gmail.com>
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -19,7 +19,7 @@ use Twig\Environment;
 /**
  * Widget Twig Render.
  *
- * @author Kerem APAYDIN <kerem@apaydin.me>
+ * @author Ramazan APAYDIN <apaydin541@gmail.com>
  */
 class TwigRender implements RenderInterface
 {
@@ -45,11 +45,6 @@ class TwigRender implements RenderInterface
 
     /**
      * WidgetRender constructor.
-     *
-     * @param Environment            $engine
-     * @param CacheItemPoolInterface $cache
-     * @param TokenStorageInterface  $tokenStorage
-     * @param string                 $baseTemplate
      */
     public function __construct(Environment $engine, CacheItemPoolInterface $cache, TokenStorageInterface $tokenStorage, string $baseTemplate)
     {
@@ -63,9 +58,6 @@ class TwigRender implements RenderInterface
      * Render Widgets.
      *
      * @param $widgets ItemInterface[]
-     * @param bool $base
-     *
-     * @return string
      */
     public function render($widgets, bool $base = true): string
     {
@@ -99,7 +91,6 @@ class TwigRender implements RenderInterface
     /**
      * Get Widget Output for Cache.
      *
-     * @param ItemInterface $item
      * @param $userId
      *
      * @return mixed|string

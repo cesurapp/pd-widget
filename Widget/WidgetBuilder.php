@@ -5,7 +5,7 @@
  *
  * @package     pd-widget
  * @license     LICENSE
- * @author      Kerem APAYDIN <kerem@apaydin.me>
+ * @author      Ramazan APAYDIN <apaydin541@gmail.com>
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 /**
  * Widget Builder.
  *
- * @author Kerem APAYDIN <kerem@apaydin.me>
+ * @author Ramazan APAYDIN <apaydin541@gmail.com>
  */
 class WidgetBuilder implements WidgetBuilderInterface
 {
@@ -41,9 +41,6 @@ class WidgetBuilder implements WidgetBuilderInterface
 
     /**
      * WidgetBuilder constructor.
-     *
-     * @param EntityManagerInterface $entityManager
-     * @param TokenStorageInterface  $tokenStorage
      */
     public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage)
     {
@@ -55,8 +52,6 @@ class WidgetBuilder implements WidgetBuilderInterface
      * Build Widgets.
      *
      * @param $widgets ItemInterface[]
-     * @param string $widgetGroup
-     * @param array  $widgetId
      *
      * @return ItemInterface[]
      */

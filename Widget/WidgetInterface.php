@@ -5,7 +5,7 @@
  *
  * @package     pd-widget
  * @license     LICENSE
- * @author      Kerem APAYDIN <kerem@apaydin.me>
+ * @author      Ramazan APAYDIN <apaydin541@gmail.com>
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -16,7 +16,7 @@ use Pd\WidgetBundle\Builder\ItemInterface;
 /**
  * Widget Interface.
  *
- * @author Kerem APAYDIN <kerem@apaydin.me>
+ * @author Ramazan APAYDIN <apaydin541@gmail.com>
  */
 interface WidgetInterface
 {
@@ -30,16 +30,12 @@ interface WidgetInterface
     /**
      * Add Item to Widget Storage.
      *
-     * @param ItemInterface $item
-     *
      * @return WidgetInterface
      */
     public function addWidget(ItemInterface $item);
 
     /**
      * Remove Item to Widget Storage.
-     *
-     * @param string $widgetId
      *
      * @return WidgetInterface
      */

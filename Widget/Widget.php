@@ -5,7 +5,7 @@
  *
  * @package     pd-widget
  * @license     LICENSE
- * @author      Kerem APAYDIN <kerem@apaydin.me>
+ * @author      Ramazan APAYDIN <apaydin541@gmail.com>
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -21,7 +21,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 /**
  * Widget Main.
  *
- * @author Kerem APAYDIN <kerem@apaydin.me>
+ * @author Ramazan APAYDIN <apaydin541@gmail.com>
  */
 class Widget implements WidgetInterface
 {
@@ -88,8 +88,6 @@ class Widget implements WidgetInterface
     /**
      * Add Widget.
      *
-     * @param ItemInterface $item
-     *
      * @return $this
      */
     public function addWidget(ItemInterface $item)
@@ -109,8 +107,6 @@ class Widget implements WidgetInterface
 
     /**
      * Remove Widget.
-     *
-     * @param string $widgetId
      *
      * @return $this
      */

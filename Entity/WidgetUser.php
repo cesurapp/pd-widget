@@ -5,7 +5,7 @@
  *
  * @package     pd-widget
  * @license     LICENSE
- * @author      Kerem APAYDIN <kerem@apaydin.me>
+ * @author      Ramazan APAYDIN <apaydin541@gmail.com>
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Pd\WidgetBundle\Repository\WidgetUserRepository")
  * @ORM\Table(name="widget_user")
  *
- * @author Kerem APAYDIN <kerem@apaydin.me>
+ * @author Ramazan APAYDIN <apaydin541@gmail.com>
  */
 class WidgetUser
 {
@@ -43,8 +43,6 @@ class WidgetUser
 
     /**
      * Get id.
-     *
-     * @return int
      */
     public function getId(): int
     {
@@ -55,8 +53,6 @@ class WidgetUser
      * Set config.
      *
      * @param array $config
-     *
-     * @return self
      */
     public function setConfig($config): self
     {
@@ -67,8 +63,6 @@ class WidgetUser
 
     /**
      * Get config.
-     *
-     * @return array
      */
     public function getConfig(): array
     {
@@ -77,9 +71,6 @@ class WidgetUser
 
     /**
      * Add Widget Config.
-     *
-     * @param string $widgetId
-     * @param array  $config
      *
      * @return $this
      */
@@ -92,9 +83,6 @@ class WidgetUser
 
     /**
      * Remove Widget Config.
-     *
-     * @param string $widgetId
-     * @param array  $config
      *
      * @return $this
      */
@@ -125,8 +113,6 @@ class WidgetUser
 
     /**
      * Get owner.
-     *
-     * @return UserInterface|null
      */
     public function getOwner(): ?UserInterface
     {

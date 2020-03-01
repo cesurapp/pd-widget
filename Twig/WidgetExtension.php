@@ -5,7 +5,7 @@
  *
  * @package     pd-widget
  * @license     LICENSE
- * @author      Kerem APAYDIN <kerem@apaydin.me>
+ * @author      Ramazan APAYDIN <apaydin541@gmail.com>
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -21,7 +21,7 @@ use Twig\TwigFunction;
 /**
  * Widget Twig Extension.
  *
- * @author Kerem APAYDIN <kerem@apaydin.me>
+ * @author Ramazan APAYDIN <apaydin541@gmail.com>
  */
 class WidgetExtension extends AbstractExtension
 {
@@ -62,11 +62,6 @@ class WidgetExtension extends AbstractExtension
 
     /**
      * Render Widget Group|Item.
-     *
-     * @param string $widgetGroup
-     * @param array  $widgetId
-     *
-     * @return string
      */
     public function renderWidget(string $widgetGroup = '', array $widgetId = []): string
     {
@@ -77,9 +72,6 @@ class WidgetExtension extends AbstractExtension
 
     /**
      * Get Widgets.
-     *
-     * @param string $widgetGroup
-     * @param array  $widgetId
      *
      * @return ItemInterface[]
      */

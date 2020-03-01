@@ -5,7 +5,7 @@
  *
  * @package     pd-widget
  * @license     LICENSE
- * @author      Kerem APAYDIN <kerem@apaydin.me>
+ * @author      Ramazan APAYDIN <apaydin541@gmail.com>
  * @link        https://github.com/appaydin/pd-widget
  */
 
@@ -17,7 +17,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 /**
  * Widget Events.
  *
- * @author Kerem APAYDIN <kerem@apaydin.me>
+ * @author Ramazan APAYDIN <apaydin541@gmail.com>
  */
 class WidgetEvent extends Event
 {
@@ -30,8 +30,6 @@ class WidgetEvent extends Event
 
     /**
      * WidgetEvent constructor.
-     *
-     * @param WidgetInterface $widget
      */
     public function __construct(WidgetInterface $widget)
     {
