@@ -23,28 +23,32 @@ interface WidgetInterface
     /**
      * Get Items to Widget Storage.
      *
-     * @return ItemInterface[]|array
+     * @param bool $checkRole
+     *
+     * @return ItemInterface[]|null
      */
-    public function getWidgets($checkRole = true);
+    public function getWidgets($checkRole = true): ?array;
 
     /**
      * Add Item to Widget Storage.
      *
+     * @param ItemInterface $item
+     *
      * @return WidgetInterface
      */
-    public function addWidget(ItemInterface $item);
+    public function addWidget(ItemInterface $item): self;
 
     /**
      * Remove Item to Widget Storage.
      *
+     * @param string $widgetId
+     *
      * @return WidgetInterface
      */
-    public function removeWidget(string $widgetId);
+    public function removeWidget(string $widgetId): self;
 
     /**
      * Clear Current User Widget Cache.
-     *
-     * @return mixed
      */
-    public function clearWidgetCache();
+    public function clearWidgetCache(): void;
 }

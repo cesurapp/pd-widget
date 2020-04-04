@@ -28,9 +28,6 @@ class WidgetEvent extends Event
      */
     private $widget;
 
-    /**
-     * WidgetEvent constructor.
-     */
     public function __construct(WidgetInterface $widget)
     {
         $this->widget = $widget;

@@ -62,16 +62,22 @@ class WidgetExtension extends AbstractExtension
 
     /**
      * Render Widget Group|Item.
+     *
+     * @param string $widgetGroup
+     * @param array $widgetId
+     *
+     * @return string
      */
     public function renderWidget(string $widgetGroup = '', array $widgetId = []): string
     {
-        $widgets = $this->widgetBuilder->build($this->widgets->getWidgets(), $widgetGroup, $widgetId, true);
-
-        return $this->engine->render($widgets);
+        return $this->engine->render($this->widgetBuilder->build($this->widgets->getWidgets(), $widgetGroup, $widgetId, true));
     }
 
     /**
      * Get Widgets.
+     *
+     * @param string $widgetGroup
+     * @param array $widgetId
      *
      * @return ItemInterface[]
      */

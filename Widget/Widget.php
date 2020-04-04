@@ -14,6 +14,7 @@ namespace Pd\WidgetBundle\Widget;
 use Pd\WidgetBundle\Builder\ItemInterface;
 use Pd\WidgetBundle\Event\WidgetEvent;
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
@@ -57,7 +58,8 @@ class Widget implements WidgetInterface
      */
     private $token;
 
-    public function __construct(AuthorizationCheckerInterface $security, EventDispatcherInterface $eventDispatcher, CacheItemPoolInterface $cache, TokenStorageInterface $token)
+    public function __construct(AuthorizationCheckerInterface $security, EventDispatcherInterface $eventDispatcher,
+                                CacheItemPoolInterface $cache, TokenStorageInterface $token)
     {
         $this->security = $security;
         $this->eventDispatcher = $eventDispatcher;
@@ -70,9 +72,9 @@ class Widget implements WidgetInterface
      *
      * @param bool $checkRole
      *
-     * @return array|ItemInterface[]
+     * @return ItemInterface[]|null
      */
-    public function getWidgets($checkRole = true)
+    public function getWidgets($checkRole = true): ?array
     {
         // Check Role
         $this->checkRole = $checkRole;
@@ -86,17 +88,17 @@ class Widget implements WidgetInterface
     }
 
     /**
-     * Add Widget.
+     * Add Widget
      *
-     * @return $this
+     * @param ItemInterface $item
+     *
+     * @return WidgetInterface
      */
-    public function addWidget(ItemInterface $item)
+    public function addWidget(ItemInterface $item): WidgetInterface
     {
         // Check Security
-        if ($this->checkRole) {
-            if ($item->getRole() && !$this->security->isGranted($item->getRole())) {
-                return $this;
-            }
+        if ($this->checkRole && $item->getRole() && !$this->security->isGranted($item->getRole())) {
+            return $this;
         }
 
         // Add
@@ -108,9 +110,11 @@ class Widget implements WidgetInterface
     /**
      * Remove Widget.
      *
+     * @param string $widgetId
+     *
      * @return $this
      */
-    public function removeWidget(string $widgetId)
+    public function removeWidget(string $widgetId): WidgetInterface
     {
         if (isset($this->widgets[$widgetId])) {
             unset($this->widgets[$widgetId]);
@@ -121,10 +125,8 @@ class Widget implements WidgetInterface
 
     /**
      * Clear current user widget cache.
-     *
-     * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function clearWidgetCache()
+    public function clearWidgetCache(): void
     {
         // Get Widgets
         $widgets = $this->getWidgets(false);
@@ -132,7 +134,10 @@ class Widget implements WidgetInterface
 
         // Clear Cache
         foreach ($widgets as $widget) {
-            $this->cache->deleteItem($widget->getId().$userId);
+            try {
+                $this->cache->deleteItem($widget->getId() . $userId);
+            } catch (InvalidArgumentException $e) {
+            }
         }
     }
 }

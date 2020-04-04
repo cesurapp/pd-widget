@@ -39,9 +39,6 @@ class WidgetBuilder implements WidgetBuilderInterface
      */
     private $widgetConfig = [];
 
-    /**
-     * WidgetBuilder constructor.
-     */
     public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage)
     {
         $this->entityManager = $entityManager;
@@ -52,10 +49,13 @@ class WidgetBuilder implements WidgetBuilderInterface
      * Build Widgets.
      *
      * @param $widgets ItemInterface[]
+     * @param string $widgetGroup
+     * @param array $widgetId
+     * @param bool $render
      *
      * @return ItemInterface[]
      */
-    public function build($widgets, string $widgetGroup = '', array $widgetId = [], bool $render = false)
+    public function build($widgets, string $widgetGroup = '', array $widgetId = [], bool $render = false): ?array
     {
         // Without Widgets
         if (!$widgets) {
@@ -93,7 +93,7 @@ class WidgetBuilder implements WidgetBuilderInterface
             $widget->setConfig($this->widgetConfig[$widget->getId()] ?? []);
 
             // Enable
-            if ('' !== $widgetGroup && $widget->getGroup() !== $widgetGroup || ($render && !$widget->isActive())) {
+            if (('' !== $widgetGroup && $widget->getGroup() !== $widgetGroup) || ($render && !$widget->isActive())) {
                 continue;
             }
 
@@ -123,7 +123,7 @@ class WidgetBuilder implements WidgetBuilderInterface
     /**
      * Load User Widget Configuration.
      */
-    private function loadUserConfig()
+    private function loadUserConfig(): void
     {
         if (!$this->widgetConfig) {
             $this->widgetConfig = $this->entityManager

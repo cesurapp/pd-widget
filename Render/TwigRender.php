@@ -43,9 +43,6 @@ class TwigRender implements RenderInterface
      */
     private $tokenStorage;
 
-    /**
-     * WidgetRender constructor.
-     */
     public function __construct(Environment $engine, CacheItemPoolInterface $cache, TokenStorageInterface $tokenStorage, string $baseTemplate)
     {
         $this->engine = $engine;
@@ -58,6 +55,9 @@ class TwigRender implements RenderInterface
      * Render Widgets.
      *
      * @param $widgets ItemInterface[]
+     * @param bool $base
+     *
+     * @return string
      */
     public function render($widgets, bool $base = true): string
     {
@@ -91,15 +91,16 @@ class TwigRender implements RenderInterface
     /**
      * Get Widget Output for Cache.
      *
+     * @param ItemInterface $item
      * @param $userId
      *
-     * @return mixed|string
+     * @return string
      */
-    public function getOutput(ItemInterface $item, $userId)
+    public function getOutput(ItemInterface $item, $userId): string
     {
         if ($item->getCacheTime()) {
             // Get Cache Item
-            $cache = $this->cache->getItem($item->getId().$userId);
+            $cache = $this->cache->getItem($item->getId() . $userId);
 
             // Set Cache Expires
             $cache->expiresAfter($item->getCacheTime());
