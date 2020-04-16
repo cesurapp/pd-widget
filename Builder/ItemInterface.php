@@ -35,9 +35,11 @@ interface ItemInterface
     /**
      * Set Item Name.
      *
+     * @param string $name
+     *
      * @return ItemInterface
      */
-    public function setName(string $name);
+    public function setName(string $name): self;
 
     /**
      * Get Item Description.
@@ -47,9 +49,11 @@ interface ItemInterface
     /**
      * Set Item Description.
      *
+     * @param string $description
+     *
      * @return ItemInterface
      */
-    public function setDescription(string $description);
+    public function setDescription(string $description): self;
 
     /**
      * Get Item Content.
@@ -59,9 +63,11 @@ interface ItemInterface
     /**
      * Set Item Content.
      *
+     * @param string $content
+     *
      * @return ItemInterface
      */
-    public function setContent(string $content);
+    public function setContent(string $content): self;
 
     /**
      * Get Item Template.
@@ -71,9 +77,11 @@ interface ItemInterface
     /**
      * Set Item Template.
      *
+     * @param string $template
+     *
      * @return ItemInterface
      */
-    public function setTemplate(string $template);
+    public function setTemplate(string $template): self;
 
     /**
      * Get Content Data.
@@ -85,43 +93,53 @@ interface ItemInterface
     /**
      * Set Content Data.
      *
+     * @param callable $data
+     *
      * @return ItemInterface
      */
-    public function setData(callable $data);
+    public function setData(callable $data): self;
 
     /**
      * @return array|null
      */
-    public function getConfig();
+    public function getConfig(): ?array;
 
     /**
+     * @param array $config
+     *
      * @return ItemInterface
      */
-    public function setConfig(array $config);
+    public function setConfig(array $config): self;
 
     /**
+     * @param Request $request
+     *
      * @return array
      */
-    public function getConfigProcess(Request $request);
+    public function getConfigProcess(Request $request): ?array;
 
     /**
+     * @param callable $process
+     *
      * @return ItemInterface
      */
-    public function setConfigProcess(callable $process);
+    public function setConfigProcess(callable $process): self;
 
     /**
      * Get Order Number.
      *
      * @return int|null
      */
-    public function getOrder();
+    public function getOrder(): ?int;
 
     /**
      * Set Order Number.
      *
+     * @param int $order
+     *
      * @return ItemInterface
      */
-    public function setOrder(int $order);
+    public function setOrder(int $order): self;
 
     /**
      * Get Access Role.
@@ -131,9 +149,11 @@ interface ItemInterface
     /**
      * Set Access Role.
      *
+     * @param array $role
+     *
      * @return ItemInterface
      */
-    public function setRole(array $role);
+    public function setRole(array $role): self;
 
     /**
      * Get Item Status.
@@ -143,9 +163,11 @@ interface ItemInterface
     /**
      * Set Item Status.
      *
+     * @param bool $status
+     *
      * @return ItemInterface
      */
-    public function setActive(bool $status);
+    public function setActive(bool $status): self;
 
     /**
      * Get Item Group.
@@ -155,9 +177,11 @@ interface ItemInterface
     /**
      * Set Item Group Name.
      *
+     * @param string $name
+     *
      * @return ItemInterface
      */
-    public function setGroup(string $name);
+    public function setGroup(string $name): self;
 
     /**
      * @return bool|int
@@ -169,5 +193,5 @@ interface ItemInterface
      *
      * @return ItemInterface
      */
-    public function setCacheTime($time);
+    public function setCacheTime($time): self;
 }

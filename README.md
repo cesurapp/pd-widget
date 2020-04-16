@@ -1,5 +1,5 @@
 # pdWidget Bundle
-Flexible widget system for Symfony 4+. 
+Flexible widget system for Symfony 5. 
 
 [![Packagist](https://img.shields.io/packagist/dt/appaydin/pd-widget.svg)](https://github.com/appaydin/pd-widget)
 [![Github Release](https://img.shields.io/github/release/appaydin/pd-widget.svg)](https://github.com/appaydin/pd-widget)

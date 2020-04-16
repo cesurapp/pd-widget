@@ -25,7 +25,11 @@ interface WidgetBuilderInterface
      *
      * @param $widgets
      *
+     * @param string $widgetGroup
+     * @param array $widgetId
+     * @param bool $render
+     *
      * @return ItemInterface[]|null
      */
-    public function build($widgets, string $widgetGroup = '', array $widgetId = []);
+    public function build($widgets, string $widgetGroup = '', array $widgetId = [],  bool $render = false): ?array;
 }

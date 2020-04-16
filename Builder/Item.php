@@ -87,7 +87,7 @@ class Item implements ItemInterface
 
     /**
      * @param mixed $id
-     * @param int   $cacheExpires
+     * @param int $cacheExpires
      */
     public function __construct($id, $cacheExpires = 3600)
     {
@@ -105,7 +105,7 @@ class Item implements ItemInterface
         return $this->name;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): ItemInterface
     {
         $this->name = $name;
 
@@ -117,7 +117,7 @@ class Item implements ItemInterface
         return $this->description;
     }
 
-    public function setDescription(string $description)
+    public function setDescription(string $description): ItemInterface
     {
         $this->description = $description;
 
@@ -129,7 +129,7 @@ class Item implements ItemInterface
         return $this->content;
     }
 
-    public function setContent(string $content)
+    public function setContent(string $content): ItemInterface
     {
         $this->content = $content;
 
@@ -141,7 +141,7 @@ class Item implements ItemInterface
         return $this->template;
     }
 
-    public function setTemplate(string $template)
+    public function setTemplate(string $template): ItemInterface
     {
         $this->template = $template;
 
@@ -159,26 +159,26 @@ class Item implements ItemInterface
         return false;
     }
 
-    public function setData(callable $data)
+    public function setData(callable $data): ItemInterface
     {
         $this->data = $data;
 
         return $this;
     }
 
-    public function getConfig()
+    public function getConfig(): ?array
     {
         return $this->config;
     }
 
-    public function setConfig(array $config)
+    public function setConfig(array $config): ItemInterface
     {
         $this->config = $config;
 
         return $this;
     }
 
-    public function getConfigProcess(Request $request)
+    public function getConfigProcess(Request $request): ?array
     {
         if (null !== $this->configProcess) {
             $data = $this->configProcess;
@@ -186,22 +186,22 @@ class Item implements ItemInterface
             return $data($request);
         }
 
-        return false;
+        return null;
     }
 
-    public function setConfigProcess(callable $process)
+    public function setConfigProcess(callable $process): ItemInterface
     {
         $this->configProcess = $process;
 
         return $this;
     }
 
-    public function getOrder()
+    public function getOrder(): ?int
     {
         return $this->order;
     }
 
-    public function setOrder(int $order)
+    public function setOrder(int $order): ItemInterface
     {
         $this->order = $order;
 
@@ -213,7 +213,7 @@ class Item implements ItemInterface
         return $this->role;
     }
 
-    public function setRole(array $role)
+    public function setRole(array $role): ItemInterface
     {
         $this->role = $role;
 
@@ -225,7 +225,7 @@ class Item implements ItemInterface
         return $this->active;
     }
 
-    public function setActive(bool $status)
+    public function setActive(bool $status): ItemInterface
     {
         $this->active = $status;
 
@@ -237,7 +237,7 @@ class Item implements ItemInterface
         return $this->group;
     }
 
-    public function setGroup(string $name)
+    public function setGroup(string $name): ItemInterface
     {
         $this->group = $name;
 
@@ -249,7 +249,7 @@ class Item implements ItemInterface
         return $this->cacheExpires;
     }
 
-    public function setCacheTime($cacheExpires)
+    public function setCacheTime($cacheExpires): ItemInterface
     {
         $this->cacheExpires = $cacheExpires;
 

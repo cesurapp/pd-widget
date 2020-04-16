@@ -18,8 +18,9 @@
     }
   ],
   "require": {
-    "php": "^7.1.0",
-    "twig/twig": "~2"
+    "php": "^7.3.0",
+    "twig/twig": "*",
+    "symfony/event-dispatcher": "*"
   },
   "autoload": {
     "psr-4": {

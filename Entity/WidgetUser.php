@@ -53,6 +53,8 @@ class WidgetUser
      * Set config.
      *
      * @param array $config
+     *
+     * @return WidgetUser
      */
     public function setConfig($config): self
     {
@@ -72,6 +74,9 @@ class WidgetUser
     /**
      * Add Widget Config.
      *
+     * @param string $widgetId
+     * @param array $config
+     *
      * @return $this
      */
     public function addWidgetConfig(string $widgetId, array $config = []): self
@@ -83,6 +88,9 @@ class WidgetUser
 
     /**
      * Remove Widget Config.
+     *
+     * @param string $widgetId
+     * @param array $config
      *
      * @return $this
      */

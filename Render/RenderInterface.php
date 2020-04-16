@@ -20,6 +20,8 @@ interface RenderInterface
 {
     /**
      * @param $widgets array|false
+     *
+     * @return string
      */
     public function render($widgets): string;
 }
