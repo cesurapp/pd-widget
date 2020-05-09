@@ -97,8 +97,18 @@ class Widget implements WidgetInterface
     public function addWidget(ItemInterface $item): WidgetInterface
     {
         // Check Security
-        if ($this->checkRole && $item->getRole() && !$this->security->isGranted($item->getRole())) {
-            return $this;
+        if ($this->checkRole && $item->getRole()) {
+            $decide = true;
+            foreach ($item->getRole() as $role) {
+                if (!$this->security->isGranted($item->getRole())) {
+                    $decide = false;
+                    break;
+                }
+            }
+
+            if ($decide) {
+                return $this;
+            }
         }
 
         // Add
