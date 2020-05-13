@@ -100,13 +100,13 @@ class Widget implements WidgetInterface
         if ($this->checkRole && $item->getRole()) {
             $decide = true;
             foreach ($item->getRole() as $role) {
-                if (!$this->security->isGranted($item->getRole())) {
+                if (!$this->security->isGranted($role)) {
                     $decide = false;
                     break;
                 }
             }
 
-            if ($decide) {
+            if (!$decide) {
                 return $this;
             }
         }
