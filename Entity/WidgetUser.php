@@ -44,7 +44,7 @@ class WidgetUser
     /**
      * Get id.
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -66,7 +66,7 @@ class WidgetUser
     /**
      * Get config.
      */
-    public function getConfig(): array
+    public function getConfig(): ?array
     {
         return $this->config;
     }
