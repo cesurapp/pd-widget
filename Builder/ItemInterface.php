@@ -20,11 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 interface ItemInterface
 {
-    /**
-     * Get Unique Item ID.
-     *
-     * @return mixed
-     */
     public function getId();
 
     /**
@@ -34,10 +29,6 @@ interface ItemInterface
 
     /**
      * Set Item Name.
-     *
-     * @param string $name
-     *
-     * @return ItemInterface
      */
     public function setName(string $name): self;
 
@@ -48,10 +39,6 @@ interface ItemInterface
 
     /**
      * Set Item Description.
-     *
-     * @param string $description
-     *
-     * @return ItemInterface
      */
     public function setDescription(string $description): self;
 
@@ -62,10 +49,6 @@ interface ItemInterface
 
     /**
      * Set Item Content.
-     *
-     * @param string $content
-     *
-     * @return ItemInterface
      */
     public function setContent(string $content): self;
 
@@ -76,68 +59,34 @@ interface ItemInterface
 
     /**
      * Set Item Template.
-     *
-     * @param string $template
-     *
-     * @return ItemInterface
      */
     public function setTemplate(string $template): self;
 
     /**
      * Get Content Data.
-     *
-     * @return mixed
      */
     public function getData();
 
     /**
      * Set Content Data.
-     *
-     * @param callable $data
-     *
-     * @return ItemInterface
      */
     public function setData(callable $data): self;
 
-    /**
-     * @return array|null
-     */
     public function getConfig(): ?array;
 
-    /**
-     * @param array $config
-     *
-     * @return ItemInterface
-     */
     public function setConfig(array $config): self;
 
-    /**
-     * @param Request $request
-     *
-     * @return array
-     */
     public function getConfigProcess(Request $request): ?array;
 
-    /**
-     * @param callable $process
-     *
-     * @return ItemInterface
-     */
     public function setConfigProcess(callable $process): self;
 
     /**
      * Get Order Number.
-     *
-     * @return int|null
      */
     public function getOrder(): ?int;
 
     /**
      * Set Order Number.
-     *
-     * @param int $order
-     *
-     * @return ItemInterface
      */
     public function setOrder(int $order): self;
 
@@ -148,10 +97,6 @@ interface ItemInterface
 
     /**
      * Set Access Role.
-     *
-     * @param array $role
-     *
-     * @return ItemInterface
      */
     public function setRole(array $role): self;
 
@@ -162,10 +107,6 @@ interface ItemInterface
 
     /**
      * Set Item Status.
-     *
-     * @param bool $status
-     *
-     * @return ItemInterface
      */
     public function setActive(bool $status): self;
 
@@ -176,22 +117,10 @@ interface ItemInterface
 
     /**
      * Set Item Group Name.
-     *
-     * @param string $name
-     *
-     * @return ItemInterface
      */
     public function setGroup(string $name): self;
 
-    /**
-     * @return bool|int
-     */
-    public function getCacheTime();
+    public function getCacheTime(): int|bool;
 
-    /**
-     * @param $time int|bool
-     *
-     * @return ItemInterface
-     */
-    public function setCacheTime($time): self;
+    public function setCacheTime(bool|int $time): self;
 }

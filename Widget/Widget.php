@@ -31,46 +31,19 @@ class Widget implements WidgetInterface
      *
      * @var array|ItemInterface[]
      */
-    private $widgets = [];
+    private array $widgets = [];
+    private bool $checkRole;
 
-    /**
-     * @var AuthorizationCheckerInterface
-     */
-    private $security;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
-
-    /**
-     * @var bool
-     */
-    private $checkRole;
-
-    /**
-     * @var CacheItemPoolInterface
-     */
-    private $cache;
-
-    /**
-     * @var TokenStorageInterface
-     */
-    private $token;
-
-    public function __construct(AuthorizationCheckerInterface $security, EventDispatcherInterface $eventDispatcher,
-                                CacheItemPoolInterface $cache, TokenStorageInterface $token)
+    public function __construct(
+        private AuthorizationCheckerInterface $security,
+        private EventDispatcherInterface $eventDispatcher,
+        private CacheItemPoolInterface $cache,
+        private TokenStorageInterface $token)
     {
-        $this->security = $security;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->cache = $cache;
-        $this->token = $token;
     }
 
     /**
      * Get Widgets.
-     *
-     * @param bool $checkRole
      *
      * @return ItemInterface[]|null
      */
@@ -89,10 +62,6 @@ class Widget implements WidgetInterface
 
     /**
      * Add Widget
-     *
-     * @param ItemInterface $item
-     *
-     * @return WidgetInterface
      */
     public function addWidget(ItemInterface $item): WidgetInterface
     {
@@ -119,10 +88,6 @@ class Widget implements WidgetInterface
 
     /**
      * Remove Widget.
-     *
-     * @param string $widgetId
-     *
-     * @return $this
      */
     public function removeWidget(string $widgetId): WidgetInterface
     {

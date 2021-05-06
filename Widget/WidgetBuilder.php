@@ -23,26 +23,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class WidgetBuilder implements WidgetBuilderInterface
 {
     /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    /**
-     * @var TokenStorageInterface
-     */
-    private $tokenStorage;
-
-    /**
      * User Widget Configuration.
-     *
-     * @var array
      */
-    private $widgetConfig = [];
+    private array $widgetConfig = [];
 
-    public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage)
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private TokenStorageInterface $tokenStorage)
     {
-        $this->entityManager = $entityManager;
-        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -55,7 +43,7 @@ class WidgetBuilder implements WidgetBuilderInterface
      *
      * @return ItemInterface[]
      */
-    public function build($widgets, string $widgetGroup = '', array $widgetId = [], bool $render = false): ?array
+    public function build(array $widgets, string $widgetGroup = '', array $widgetId = [], bool $render = false): ?array
     {
         // Without Widgets
         if (!$widgets) {
@@ -126,14 +114,14 @@ class WidgetBuilder implements WidgetBuilderInterface
     private function loadUserConfig(): void
     {
         if (!$this->widgetConfig) {
-            $this->widgetConfig = $this->entityManager
+            $config = $this->entityManager
                 ->getRepository('PdWidgetBundle:WidgetUser')
                 ->findOneBy([
                     'owner' => $this->tokenStorage->getToken()->getUser(),
                 ]);
 
-            if (null !== $this->widgetConfig) {
-                $this->widgetConfig = $this->widgetConfig->getConfig();
+            if (null !== $config) {
+                $this->widgetConfig = $config->getConfig();
             }
         }
     }

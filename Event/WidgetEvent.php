@@ -23,14 +23,9 @@ class WidgetEvent extends Event
 {
     public const WIDGET_START = 'widget.start';
 
-    /**
-     * @var WidgetInterface
-     */
-    private $widget;
-
-    public function __construct(WidgetInterface $widget)
+    public function __construct(
+        private WidgetInterface $widget)
     {
-        $this->widget = $widget;
     }
 
     public function getWidgetContainer(): WidgetInterface
