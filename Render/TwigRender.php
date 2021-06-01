@@ -23,32 +23,12 @@ use Twig\Environment;
  */
 class TwigRender implements RenderInterface
 {
-    /**
-     * @var Environment
-     */
-    private $engine;
-
-    /**
-     * @var string
-     */
-    private $baseTemplate;
-
-    /**
-     * @var CacheItemPoolInterface
-     */
-    private $cache;
-
-    /**
-     * @var TokenStorageInterface
-     */
-    private $tokenStorage;
-
-    public function __construct(Environment $engine, CacheItemPoolInterface $cache, TokenStorageInterface $tokenStorage, string $baseTemplate)
+    public function __construct(
+        private Environment $engine,
+        private CacheItemPoolInterface $cache,
+        private TokenStorageInterface $tokenStorage,
+        private string $baseTemplate)
     {
-        $this->engine = $engine;
-        $this->cache = $cache;
-        $this->tokenStorage = $tokenStorage;
-        $this->baseTemplate = $baseTemplate;
     }
 
     /**
@@ -90,11 +70,6 @@ class TwigRender implements RenderInterface
 
     /**
      * Get Widget Output for Cache.
-     *
-     * @param ItemInterface $item
-     * @param $userId
-     *
-     * @return string
      */
     public function getOutput(ItemInterface $item, $userId): string
     {

@@ -25,34 +25,17 @@ use Twig\TwigFunction;
  */
 class WidgetExtension extends AbstractExtension
 {
-    /**
-     * @var RenderInterface
-     */
-    private $engine;
-
-    /**
-     * @var WidgetBuilderInterface
-     */
-    private $widgetBuilder;
-
-    /**
-     * @var WidgetInterface
-     */
-    private $widgets;
-
-    public function __construct(RenderInterface $engine, WidgetBuilderInterface $widgetBuilder, WidgetInterface $widgets)
+    public function __construct(
+        private RenderInterface $engine,
+        private WidgetBuilderInterface $widgetBuilder,
+        private WidgetInterface $widgets)
     {
-        $this->engine = $engine;
-        $this->widgetBuilder = $widgetBuilder;
-        $this->widgets = $widgets;
     }
 
     /**
      * Twig Functions.
-     *
-     * @return array
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('pd_widget_render', [$this, 'renderWidget'], ['is_safe' => ['html']]),
@@ -62,11 +45,6 @@ class WidgetExtension extends AbstractExtension
 
     /**
      * Render Widget Group|Item.
-     *
-     * @param string $widgetGroup
-     * @param array $widgetId
-     *
-     * @return string
      */
     public function renderWidget(string $widgetGroup = '', array $widgetId = []): string
     {
@@ -75,9 +53,6 @@ class WidgetExtension extends AbstractExtension
 
     /**
      * Get Widgets.
-     *
-     * @param string $widgetGroup
-     * @param array $widgetId
      *
      * @return ItemInterface[]
      */

@@ -18,10 +18,5 @@ namespace Pd\WidgetBundle\Render;
  */
 interface RenderInterface
 {
-    /**
-     * @param $widgets array|false
-     *
-     * @return string
-     */
-    public function render($widgets): string;
+    public function render(bool|array $widgets): string;
 }

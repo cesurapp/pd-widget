@@ -20,75 +20,27 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class Item implements ItemInterface
 {
-    /**
-     * @var mixed
-     */
     private $id;
-
-    /**
-     * @var string
-     */
-    private $name = '';
-
-    /**
-     * @var string
-     */
-    private $description = '';
-
-    /**
-     * @var string
-     */
-    private $content = '';
-
-    /**
-     * @var null
-     */
-    private $template = '';
-
+    private string $name = '';
+    private string $description = '';
+    private string $content = '';
+    private string $template = '';
     /**
      * @var callable
      */
     private $data;
-
-    /**
-     * @var array
-     */
-    private $config;
+    private array $config;
 
     /**
      * @var callable
      */
     private $configProcess;
-
-    /**
-     * @var int
-     */
     private $order;
+    private array $role = [];
+    private string $group = '';
+    private bool $active = false;
+    private int|bool $cacheExpires;
 
-    /**
-     * @var array;
-     */
-    private $role = [];
-
-    /**
-     * @var string
-     */
-    private $group = '';
-
-    /**
-     * @var bool
-     */
-    private $active = false;
-
-    /**
-     * @var int|bool
-     */
-    private $cacheExpires;
-
-    /**
-     * @param mixed $id
-     * @param int $cacheExpires
-     */
     public function __construct($id, $cacheExpires = 3600)
     {
         $this->id = $id;
@@ -244,14 +196,14 @@ class Item implements ItemInterface
         return $this;
     }
 
-    public function getCacheTime()
+    public function getCacheTime(): bool|int
     {
         return $this->cacheExpires;
     }
 
-    public function setCacheTime($cacheExpires): ItemInterface
+    public function setCacheTime(bool|int $time): ItemInterface
     {
-        $this->cacheExpires = $cacheExpires;
+        $this->cacheExpires = $time;
 
         return $this;
     }

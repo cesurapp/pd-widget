@@ -27,25 +27,24 @@ use Symfony\Contracts\Cache\CacheInterface;
  */
 class WidgetController extends AbstractController
 {
+    public function __construct(
+        private WidgetUserRepository $widgetUserRepo,
+        private CacheInterface $cache
+    )
+    {
+    }
+
     /**
      * Change Widget Status.
-     *
-     * @param Request $request
-     * @param WidgetInterface $widget
-     * @param WidgetUserRepository $widgetUserRepo
-     * @param string $widgetId
-     * @param bool $status
-     *
-     * @return RedirectResponse
      */
-    public function status(Request $request, WidgetInterface $widget, WidgetUserRepository $widgetUserRepo, string $widgetId, bool $status = true): RedirectResponse
+    public function status(Request $request, WidgetInterface $widget, string $widgetId, bool $status = true): RedirectResponse
     {
         // Build Widget
         $widgets = $widget->getWidgets();
 
         if (isset($widgets[$widgetId])) {
             // Get User Widgets
-            $widgetConfig = $widgetUserRepo->findOneBy(['owner' => $this->getUser()]) ?? (new WidgetUser())->setOwner($this->getUser());
+            $widgetConfig = $this->widgetUserRepo->findOneBy(['owner' => $this->getUser()]) ?? (new WidgetUser())->setOwner($this->getUser());
 
             // Add Config Parameters
             $widgetConfig->addWidgetConfig($widgetId, ['status' => $status]);
@@ -62,24 +61,15 @@ class WidgetController extends AbstractController
 
     /**
      * Change Widget Configuration.
-     *
-     * @param Request $request
-     * @param WidgetInterface $widget
-     * @param CacheInterface $cache
-     * @param WidgetUserRepository $widgetUserRepo
-     * @param string $widgetId
-     *
-     * @return RedirectResponse
      */
-    public function configs(Request $request, WidgetInterface $widget, CacheInterface $cache,
-                            WidgetUserRepository $widgetUserRepo, string $widgetId): RedirectResponse
+    public function configs(Request $request, WidgetInterface $widget, string $widgetId): RedirectResponse
     {
         // Build Widget
         $widgets = $widget->getWidgets();
 
         if (isset($widgets[$widgetId])) {
             // Get User Widgets
-            $widgetConfig = $widgetUserRepo->findOneBy(['owner' => $this->getUser()]) ?? (new WidgetUser())->setOwner($this->getUser());
+            $widgetConfig = $this->widgetUserRepo->findOneBy(['owner' => $this->getUser()]) ?? (new WidgetUser())->setOwner($this->getUser());
 
             // Add or Remove Config Parameters
             if ($request->get('remove')) {
@@ -94,7 +84,7 @@ class WidgetController extends AbstractController
             $em->flush();
 
             // Flush Widget Cache
-            $cache->delete($widgetId . $this->getUser()->getId());
+            $this->cache->delete($widgetId . $this->getUser()->getId());
         }
 
         // Response
@@ -103,22 +93,15 @@ class WidgetController extends AbstractController
 
     /**
      * Change Widget Order.
-     *
-     * @param WidgetInterface $widget
-     * @param WidgetUserRepository $widgetUserRepo
-     * @param string $widgetId
-     * @param int $order
-     *
-     * @return JsonResponse
      */
-    public function order(WidgetInterface $widget, WidgetUserRepository $widgetUserRepo, string $widgetId, int $order): JsonResponse
+    public function order(WidgetInterface $widget, string $widgetId, int $order): JsonResponse
     {
         // Build Widget
         $widgets = $widget->getWidgets();
 
         if (isset($widgets[$widgetId])) {
             // Get User Widgets
-            $widgetConfig = $widgetUserRepo->findOneBy(['owner' => $this->getUser()]) ?? (new WidgetUser())->setOwner($this->getUser());
+            $widgetConfig = $this->widgetUserRepo->findOneBy(['owner' => $this->getUser()]) ?? (new WidgetUser())->setOwner($this->getUser());
 
             // Add Config Parameters
             $widgetConfig->addWidgetConfig($widgetId, ['order' => $order]);
